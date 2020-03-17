@@ -4,7 +4,7 @@ from django.core.validators import MaxValueValidator
 from django.contrib.auth import models as auth_models
 
 class User(auth_models.AbstractUser):
-    is_active=models.Boolean(default=False) #faltaria parametre name="User activated"
+    is_active=models.BooleanField(default=False) #faltaria parametre name="User activated"
 
     def __str__(self):
         return self.name
