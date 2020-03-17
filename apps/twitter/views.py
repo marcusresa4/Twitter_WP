@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+def twitter(request):
+    return render(request, 'feed.html', {})
+
