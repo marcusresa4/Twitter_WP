@@ -1,6 +1,6 @@
 from django.db import models
-from django.core.validators import MinValueVAlidator
-from django.core.validators import MaxValueVAlidator
+from django.core.validators import MinValueValidator
+from django.core.validators import MaxValueValidator
 from django.contrib.auth import models as auth_models
 
 class User(auth_models.AbstractUser):
