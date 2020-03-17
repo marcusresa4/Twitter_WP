@@ -3,11 +3,6 @@ from django.core.validators import MinValueValidator
 from django.core.validators import MaxValueValidator
 from django.contrib.auth import models as auth_models
 
-class User(auth_models.AbstractUser):
-    is_active=models.BooleanField(default=False) #faltaria parametre name="User activated"
-
-    def __str__(self):
-        return self.name
 
 class TwitterUser(models.Model):
     username=models.CharField(max_length=15)
@@ -15,27 +10,27 @@ class TwitterUser(models.Model):
     followers=models.PositiveIntegerField()
 
     def __str__(self):
-        return self.name
+        return self.username
 
 class Tweet(models.Model):
 
     def __str__(self):
-        return self.name
+        return self
     
 class Hashtag(models.Model):
 
     def __str__(self):
-        return self.name
+        return self
 
 class Statistics(models.Model):
 
     def __str__(self):
-        return self.name
+        return self
 
 class Impact(models.Model):
 
     def __str__(self):
-        return self.name
+        return self
 
 
 
