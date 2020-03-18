@@ -13,7 +13,6 @@ class TwitterUser(models.Model):
         return self.username
 
 class Tweet(models.Model):
-
     def __str__(self):
         return self
     
