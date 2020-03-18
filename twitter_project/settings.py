@@ -25,7 +25,7 @@ SECRET_KEY = 'it4qluft697r5zjj=nj-sz&nnc3z2&-x&wo_xg-vw57bh#(im^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -67,6 +67,8 @@ TEMPLATES = [
         },
     },
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 WSGI_APPLICATION = 'twitter_project.wsgi.application'
 
