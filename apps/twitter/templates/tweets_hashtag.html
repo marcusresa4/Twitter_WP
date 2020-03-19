@@ -5,7 +5,7 @@
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="{% url 'feed' %}">Twitter Monitoring by i4Ventures</a>
 </nav>
-    <h2 style="margin-left: 30%;margin-top: 20px">All the Tweets</h2>
+    <h2 style="margin-left: 30%;margin-top: 20px">Tweets about {{ hashtag }}</h2>
 <br>
     {% for tweet in tweets %}
 

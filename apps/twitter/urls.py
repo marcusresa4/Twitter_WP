@@ -5,5 +5,7 @@ from apps.twitter import views
 # This file contains a list of URL patterns that correspond to various views functions.
 
 urlpatterns = [
-	path('', views.twitter, name='feed')
+	path('', views.twitter, name='feed'),
+	path('user/<username>', views.twitteruser, name='tweets_user'),
+	path('hashtag/<hashtag>', views.twitterhashtag, name='tweets_hashtag')
 ]

@@ -42,4 +42,4 @@ class Impact(models.Model):
     stat_value = models.PositiveIntegerField()
 
     def __str__(self):
-        return self
+        return str(self.stat_value)
