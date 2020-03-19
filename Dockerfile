@@ -5,8 +5,6 @@ WORKDIR /twitter_container
 ADD . /twitter_container
 RUN pip install -r requirements.txt
 EXPOSE 8000
-STOPSIGNAL SIGINT
-ENTRYPOINT ["python", "manage.py"]
-CMD ["runserver"]
+
 
 
