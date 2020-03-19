@@ -1,0 +1,9 @@
+version: "3"
+services:
+  web:
+    build: .
+    tty: true
+    command: bash -c " python3.7 manage.py makemigrations && python3.7 manage.py migrate && python3.7 manage.py runserver 0.0.0.0:8000"
+    container_name: twitter_container
+    ports:
+    - "8000:8000"
