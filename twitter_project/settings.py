@@ -136,4 +136,4 @@ LOGIN_URL = '/auth/login/google-oauth2/'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'twittermonitoring/'
