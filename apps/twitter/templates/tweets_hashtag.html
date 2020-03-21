@@ -19,6 +19,16 @@
                 {{ hashtags.hashtag }}
             </a>&nbsp;
           {%  endfor %}
+          <br>
+              {% for impact in impacts %}
+                    {% if impact.tweet.id_tweet == tweet.id_tweet and impact.stat.type_stat == "RT" %}
+                        <a style="font-size: small ; color: dimgrey;">RT: {{ impact.stat_value }}</a>
+
+                    {% endif %}
+                      {% if impact.tweet.id_tweet == tweet.id_tweet and impact.stat.type_stat == "FAV" %}
+                        <a style="font-size: small ; color: dimgrey;">FAV: {{ impact.stat_value }}</a>
+                  {% endif %}
+              {%  endfor %}
       </div>
     </div>
          <br>

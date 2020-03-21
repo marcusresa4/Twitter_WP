@@ -8,7 +8,6 @@ class TwitterUser(models.Model):
     realname = models.CharField(max_length=25)
     following = models.PositiveIntegerField()
     followers = models.PositiveIntegerField()
-    numtweets = models.PositiveIntegerField()
 
     def __str__(self):
         return self.username
@@ -37,8 +36,8 @@ class Statistics(models.Model):
 
 
 class Impact(models.Model):
-    id_tweet = models.ForeignKey('Tweet', on_delete=models.CASCADE)
-    type_stat = models.ForeignKey('Statistics', on_delete=models.CASCADE)
+    tweet = models.ForeignKey('Tweet', on_delete=models.CASCADE)
+    stat = models.ForeignKey('Statistics', on_delete=models.CASCADE)
     stat_value = models.PositiveIntegerField()
 
     def __str__(self):
