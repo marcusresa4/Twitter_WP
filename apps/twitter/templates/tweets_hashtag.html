@@ -4,6 +4,7 @@
 {% block page_content %}
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="{% url 'feed' %}">Twitter Monitoring by i4Ventures</a>
+   <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary ">Log Out</button></a>
 </nav>
     <h2 style="margin-left: 30%;margin-top: 20px">Tweets about {{ hashtag }}</h2>
 <br>
