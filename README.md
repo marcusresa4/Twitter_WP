@@ -14,7 +14,7 @@ docker-machine ip default
 ```
 
 ## Running the tests
-
+By using Travis CI we are able to build and test the application hosted on GitHub. Travis runs the tests every time we commit to GitHub, which allows us to easily discover the code breaks.
 
 ## Authors:
     Xavier Trullols
