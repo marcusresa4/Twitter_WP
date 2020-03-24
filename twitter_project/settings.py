@@ -148,5 +148,5 @@ STATICFILES_DIRS = (
 
 
 if '/app' in os.environ['HOME']:
-    import django-heroku
-    django-heroku.settings(locals())
+    import django_heroku
+    django_heroku.settings(locals())
