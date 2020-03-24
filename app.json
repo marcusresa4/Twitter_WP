@@ -1,0 +1,12 @@
+{
+    "stack": "container",
+    "addons": [
+        {
+            "plan": "heroku-postgresql:hobby-dev",
+            "as": "DATABASE",
+            "options": {
+                "version": "12"
+            }
+        }
+    ]
+}
