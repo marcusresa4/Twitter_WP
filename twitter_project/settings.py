@@ -71,7 +71,7 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = 'twitter_project.wsgi:application'
+WSGI_APPLICATION = 'twitter_project.wsgi.application'
 
 
 # Database
@@ -80,11 +80,11 @@ WSGI_APPLICATION = 'twitter_project.wsgi:application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django',
+        'NAME': 'dbtwitter',
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'DATABASE_PORT': '5432',
     }
 }
 
