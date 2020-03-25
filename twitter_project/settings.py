@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.twitter',
     'social_django',
-    'apps.oauth2'
+    'apps.oauth2',
+    'social.apps.django_app.default'
+
 ]
 
 MIDDLEWARE = [
