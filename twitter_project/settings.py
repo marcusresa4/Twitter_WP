@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'apps.twitter',
     'social_django',
     'apps.oauth2',
-    'social.apps.django_app.default'
+    'social-django'
 
 ]
 
