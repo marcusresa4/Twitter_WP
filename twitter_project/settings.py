@@ -38,9 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.twitter',
-    'social_django',
+    'django_social',
     'apps.oauth2',
-    'social-django'
 
 ]
 
