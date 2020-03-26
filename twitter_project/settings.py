@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.twitter',
     'social_django',
-    'apps.oauth2'
+    'apps.oauth2',
 ]
 
 MIDDLEWARE = [
@@ -146,7 +146,6 @@ LOGIN_REDIRECT_URL = 'twittermonitoring/'
 
 PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
 STATIC_ROOT  =   os.path.join(PROJECT_ROOT, 'staticfiles')
-STATIC_URL = '/static/'
 
 # Extra lookup directories for collectstatic to find static files
 STATICFILES_DIRS = (
