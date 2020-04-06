@@ -1,16 +1,21 @@
 language: python
 python:
-  - "3.7"
-
+- '3.7'
 install:
-  - pip install -r requirements.txt
-
+- pip install -r requirements.txt
 script:
-  - python manage.py test apps
-
+- python manage.py test apps
 notifications:
   email:
-    - marcresaenrich@gmail.com
-    - aguilars99@gmail.com
-    - guillem.escarp@gmail.com
-    - xtrullols35@gmail.com
+  - marcresaenrich@gmail.com
+  - aguilars99@gmail.com
+  - guillem.escarp@gmail.com
+  - xtrullols35@gmail.com
+deploy:
+  provider: heroku
+  api_key:
+    secure: DZxQJDN8SPeHaBXI9rItqVHy7Vq5mNWyPaUYb4D5q6Pg1dkAph6tmSA9eI/GTJz0jVaJwOVdONFVbxSWAaOAucFvOrofyQOtFb0h2sB4FmQjGMVvApKaECu8giiJpdXNTmh0ciYPcwwiNzdfsjmNZY+zUt9I4+TPqmAuc5V+rlnxhNBBfxUjymIT8/y2sMaZlIn/QwWmKW22yrt/GbESJazVdG51QFWd3AeTRm2P2Fz9YfYmjJpjK5tZ7NDsRPuQAcjwaNKQRgm61D6meKY6vyTbJbPc0vPQ4nVhoziPdRYGSLYliIyC2GXSaQT+Kl3CK0r4tzrkgBFU6cm231GivJRfsobAeCkhTtkEIHpCtaJ+iRejUQ6r0+2crPAZfWQjkJhdonoBkTXtCG/S6BR7/UnhQUZJzQvJvDvEaQ4PTTchAN5vyMJLLnKJnGADG82TXLp2RXtAYSXzgVFSmvfeNjLqAUrNxX7Ef8KjC1UPntKyIuNrfM0GmWGDfrgD1zv3mRGsF72psUvBooOY0CBMWbfsCDb9QlHulmE2Jjg2STDvTdfLaB+lRb01P4UylmVcN4jiFBjdy89EhZb1tjG3a86AGV58TrDpiz4ORdnLx9Sf8Gfb/ivdSU1E/XspxNoBl4HqbW3byF47eJOudiY6e/gVwFQ7Cunf7A+uxfzp01Q=
+  app: twitterwpappheroku #Heroku app's name
+  on:
+    repo: marcusresa4/Twitter_WP
+    branch: master
