@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from apps.twitter.models import Tweet, TwitterUser, Statistics, Impact
+import sys
+from . import user_api
 
 def twitter(request):
     tweets = Tweet.objects.all()
@@ -10,6 +12,20 @@ def twitter(request):
     }
 
     return render(request, 'feed.html', context)
+
+def external(request):
+    input = request.POST.get('param')
+    try:
+        output = user_api.get_tweets(input)
+    except:
+        output = "ERROR!!!!"
+
+    context = {
+        'data' : output
+    }
+
+    return render(request, 'api.html', context)
+
 
 def twitteruser(request, username):
     tweets = Tweet.objects.filter(
