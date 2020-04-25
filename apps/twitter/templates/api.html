@@ -2,16 +2,21 @@
 {% load static %}
 
 {% block page_content %}
-    <form action = "" method="post">
-    {% csrf_token %}
-    Input text:
-        <label>
-            <input type="text" name="param" required>
-        </label><br><br>
-    {{ data_external }} <br><br>
-        {{ data }}
-        <br><br>
-    <input type="submit" value="Execute Python">
-    </form>
+    {% if user.is_authenticated %}
+        <form action = "" method="post">
+        {% csrf_token %}
+        Input text:
+            <label>
+                <input type="text" name="param" required>
+            </label><br><br>
+        {{ data_external }} <br><br>
+            {{ data }}
+            <br><br>
+        <input type="submit" value="Execute Python">
+        </form>
+    {% else %}
+        No estàs autentificat
+    {% endif %}
+
 {% endblock %}
 
