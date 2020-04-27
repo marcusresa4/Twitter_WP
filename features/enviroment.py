@@ -8,6 +8,7 @@ from django.test.runner import DiscoverRunner
 from splinter.browser import Browser
 
 os.environ["DJANGO_SETTINGS_MODULE"] = "twitter_project.settings"
+#os.environ.setdefault("DJANGO_SETTINGS_MODULE", "twitter_project.settings")
 
 class ExtendedContext(Context):
     def get_url(self, to=None, *args, **kwargs):
