@@ -15,8 +15,8 @@ class TweetForm(forms.Form):
         max_length=280,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control-hashtag',
-                'placeholder': 'Insert hashtag'
+                'class': 'form-control',
+                'placeholder': 'Insert hashtags'
             }
         )
     )

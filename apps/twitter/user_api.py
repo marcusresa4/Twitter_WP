@@ -28,35 +28,33 @@ def get_tweets(username):
   
         # create array of tweet information: username,  
         # tweet id, date/time, text 
-        tweet_text = tweets  
+        tweet_text = tweets
+        dictionary = {}
         #print(tweet_text[0])
         #print("Text:"+ tweet_text[0].text)
-        tmp.append("Text:"+ tweet_text[0].text)
+        #tmp.append("Text:"+ tweet_text[0].text)
+        dictionary["Text"] = tweet_text[0].text
         #print("Name:"+ tweet_text[0].user.name)
-        tmp.append("Username:"+ tweet_text[0].user.name)
+        #tmp.append("Username:"+ tweet_text[0].user.name)
+        dictionary["Real Name"] = tweet_text[0].user.name
         #print("Username:"+ tweet_text[0].user.screen_name)
-        tmp.append("Name:"+ tweet_text[0].user.screen_name)
+        #tmp.append("Name:"+ tweet_text[0].user.screen_name)
+        dictionary["Username"] = tweet_text[0].user.screen_name
         #print("User_id:"+ tweet_text[0].user.id_str)
-        tmp.append("Id:"+ tweet_text[0].user.id_str)
+        #tmp.append("Id:"+ tweet_text[0].user.id_str)
+        dictionary["Id_Tweet"] = tweet_text[0].id_str
+        dictionary["Id_User"] = str(tweet_text[0].user.id)
         #print("Hashtags:"+ str(tweet_text[0].entities["hashtags"]))
-        tmp.append("Hashtag:"+ str(tweet_text[0].entities["hashtags"]))
+        #tmp.append("Hashtag:"+ str(tweet_text[0].entities["hashtags"]))
+        dictionary["Hashtags"] = tweet_text[0].entities["hashtags"]
         #print("RT:"+ str(tweet_text[0].retweet_count))
-        tmp.append("RT:"+ str(tweet_text[0].retweet_count))
+        #tmp.append("RT:"+ str(tweet_text[0].retweet_count))
+        dictionary["RT"] = str(tweet_text[0].retweet_count)
         #print("FAV:"+ str(tweet_text[0].favorite_count))
-        tmp.append("FAV:"+ str(tweet_text[0].favorite_count))
+        #tmp.append("FAV:"+ str(tweet_text[0].favorite_count))
+        dictionary["FAV"] = str(tweet_text[0].favorite_count)
 
-
-        
-        """
-        for j in tweets_for_csv: 
-  
-            # Appending tweets to the empty array tmp 
-            tmp.append(j)  
-  
-        # Printing the tweets 
-        print(tmp)"""
-
-        return tmp
+        return dictionary
 # Driver code 
 if __name__ == '__main__': 
   
