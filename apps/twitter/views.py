@@ -48,6 +48,20 @@ def create_tweet(request):
         tweet.hashtag_in_tweet.set(hashtags)
         tweet.save()
 
+        impact = Impact.objects.create(
+            tweet=tweet,
+            stat=Statistics.objects.get(type_stat="RT"),
+            stat_value=0
+        )
+        impact.save()
+        impact = Impact.objects.create(
+            tweet=tweet,
+            stat=Statistics.objects.get(type_stat="FAV"),
+            stat_value=0
+        )
+        impact.save()
+
+
 
 def create_tweet_from_API(request):
     print("HOLA")
@@ -76,6 +90,18 @@ def create_tweet_from_API(request):
 
     tweet.hashtag_in_tweet.set(hashtags)
     tweet.save()
+    impact = Impact.objects.create(
+        tweet=tweet,
+        stat=Statistics.objects.get(type_stat="RT"),
+        stat_value=int(output["RT"])
+    )
+    impact.save()
+    impact = Impact.objects.create(
+        tweet=tweet,
+        stat=Statistics.objects.get(type_stat="FAV"),
+        stat_value=int(output["FAV"])
+    )
+    impact.save()
 
 def find_hashtags_from_API(hashtags):
     word_array = hashtags.split()
