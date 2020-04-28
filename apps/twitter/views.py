@@ -43,9 +43,19 @@ def create_tweet(request):
             text=form.cleaned_data['text'],
             user=user
         )
-        hashtags, created = Hashtag.objects.get_or_create(hashtag=form.cleaned_data['hashtag_in_tweet'])
-        tweet.hashtag_in_tweet.set({hashtags})
+        hashtags = create_hashtags(form)
+        tweet.hashtag_in_tweet.set(hashtags)
         tweet.save()
+
+def create_hashtags(form):
+    hashtag = []
+    hashtags_str = form.cleaned_data['hashtag_in_tweet'].split()
+    for ht in hashtags_str:
+        hashtags, created = Hashtag.objects.get_or_create(hashtag=ht)
+        hashtag.append(hashtags)
+
+    return hashtag
+
 
 
 def external(request):
