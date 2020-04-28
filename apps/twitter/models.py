@@ -28,7 +28,6 @@ class Hashtag(models.Model):
     def __str__(self):
         return self.hashtag
 
-
 class Statistics(models.Model):
     type_stat = models.CharField(primary_key=True, max_length=7) # Retweet is the longest (likes length 5)
 
