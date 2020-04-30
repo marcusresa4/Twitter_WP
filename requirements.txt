@@ -9,3 +9,4 @@ social-auth-app-django
 tweepy
 behave
 splinter==0.13.0
+behave-django
