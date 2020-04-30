@@ -7,7 +7,7 @@ Feature: Create a Tweet
     Given Exists a user logged {username} {name} {surname} {password}
 
   Scenario: Create a Tweet
-    Given I login as user with Google {username} {name} {surname} {password}
+    Given That {username} is logged in
     When I create a Tweet
       | text                    |
       | This is my first Tweet  |

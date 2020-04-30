@@ -12,11 +12,13 @@ def step_impl(context, username, name, surname, password):
                              email='user@example.com', password=password)
     c.force_login(user)
 
-@given('I login as user with Google {username} {name} {surname} {password}')
-def step_impl(context, username, name, surname, password):
+@given('That {username} is logged in')
+def step_impl(context, username):
     from django.contrib.auth.models import User
-
-    User.objects.create_user(username=username, first_name=name, last_name=surname,
-                                    email='user@example.com', password=password)
+    context.browser.visit(context.get_url('/auth/login/google-oauth2/'))
+    form = context.browser.find_by_tag('form').first
+    context.browser.fill('username', username)
+    form.find_by_value('login').first.click()
+    assert context.browser.is_text_present('User: ' + username)
 
 
