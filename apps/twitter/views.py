@@ -11,6 +11,9 @@ def twitter(request):
             create_tweet(request)
         elif "API" in request.POST:
             create_tweet_from_API(request)
+        elif "Edit Tweet" in request.POST:
+            edit_tweet(request)
+
 
     tweets = Tweet.objects.all()
     impacts = Impact.objects.all()
@@ -22,6 +25,17 @@ def twitter(request):
     }
 
     return render(request, 'feed.html', context)
+
+def edit_tweet(request):
+    form = TweetForm(request.POST)
+    if form.is_valid():
+        input = request.POST.get('param')
+        print(input)
+        tweet_to_edit = Tweet.objects.all().get(text=input)
+        tweet_to_edit.text = form.cleaned_data['text']
+        hashtags = create_hashtags(form)
+        tweet_to_edit.hashtag_in_tweet.set(hashtags)
+        tweet_to_edit.save()
 
 def create_tweet(request):
     form = TweetForm(request.POST)
@@ -61,10 +75,7 @@ def create_tweet(request):
         )
         impact.save()
 
-
-
 def create_tweet_from_API(request):
-    print("HOLA")
     input = request.POST.get('param')
     output = user_api.get_tweets(input)
 

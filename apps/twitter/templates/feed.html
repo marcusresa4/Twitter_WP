@@ -48,7 +48,7 @@
       </h2>
     </div>
 
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
       <div class="card-body">
             <form action = "" method="post">
         {% csrf_token %}
@@ -65,6 +65,8 @@
       </div>
     </div>
   </div>
+
+
   <div class="card">
     <div class="card-header" id="headingTwo">
       <h2 class="mb-0">
@@ -89,21 +91,44 @@
       </div>
     </div>
   </div>
+
+
   <div class="card">
     <div class="card-header" id="headingThree">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Collapsible Group Item #3
+          Edit Tweet
         </button>
       </h2>
     </div>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-      <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+  <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+  <form action = "" method="post">
+  {% csrf_token %}
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Select Tweet that do you want to edit</label>
+        <select class="form-control" id="exampleFormControlSelect1" name="param">
+          {% for tweet in tweets %}
+              {% if tweet.user.username == "@superuser" %}
+                  <option>{{ tweet.text }}</option>
+              {% endif %}
+            {% endfor %}
+        </select>
       </div>
+         Tweet's body:
+         <div class="form-group">
+            {{ form.text }}
+         </div>
+            Insert Hashtags separated by blank space:
+        <div class="form-group">
+            {{ form.hashtag_in_tweet }}
+        </div>
+
+    <input type="submit" class="btn btn-primary" name="Edit Tweet" value="Edit Tweet">
+    </form>
+
     </div>
-  </div>
-</div>
+    </div>
+    </div>
 
     {% endif %}
 {% endblock %}
