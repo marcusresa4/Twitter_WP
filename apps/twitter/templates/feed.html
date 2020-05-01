@@ -3,7 +3,7 @@
 
 {% block page_content %}
 <nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="{% url 'feed' %}">Twitter Monitoring by i4Ventures</a>
+  <a class="navbar-brand" href="{% url 'feed' %}">Twitter 2.0 by i4Ventures</a>
    <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary ">Log Out</button></a>
 </nav>
 
@@ -83,16 +83,11 @@
             <label>
                 <input type="text" name="param" required>
             </label><br><br>
-        {{ data_external }} <br><br>
-            {{ data }}
-            <br><br>
         <input type="submit" class="btn btn-primary" name="API" value="Get Tweet from API">
         </form>
       </div>
     </div>
   </div>
-
-
   <div class="card">
     <div class="card-header" id="headingThree">
       <h2 class="mb-0">
@@ -102,7 +97,8 @@
       </h2>
     </div>
   <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-  <form action = "" method="post">
+  <form action = "" method="post" style="margin-left: 20px">
+  <br>
   {% csrf_token %}
       <div class="form-group">
         <label for="exampleFormControlSelect1">Select Tweet that do you want to edit</label>
@@ -129,6 +125,31 @@
     </div>
     </div>
     </div>
+        <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed">
+          Delete Tweet
+        </button>
+      </h2>
+    </div>
+    <div style="margin-left: 20px">
+    <br>
+      <form action = "" method="post">
+      {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Select Tweet that do you want to delete</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="param">
+              {% for tweet in tweets %}
+                      <option>{{ tweet.text }}</option>
+                {% endfor %}
+            </select>
+          </div>
+
+        <input type="submit" class="btn btn-primary" name="Delete Tweet" value="Delete Tweet">
+        </form>
+    </div>
 
     {% endif %}
+
+    <br>
 {% endblock %}

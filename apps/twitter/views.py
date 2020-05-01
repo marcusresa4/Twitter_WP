@@ -13,7 +13,8 @@ def twitter(request):
             create_tweet_from_API(request)
         elif "Edit Tweet" in request.POST:
             edit_tweet(request)
-
+        elif "Delete Tweet" in request.POST:
+            delete_tweet(request)
 
     tweets = Tweet.objects.all()
     impacts = Impact.objects.all()
@@ -25,6 +26,13 @@ def twitter(request):
     }
 
     return render(request, 'feed.html', context)
+
+
+def delete_tweet(request):
+    input = request.POST.get('param')
+    if input != None:
+        print(input)
+        Tweet.objects.all().filter(text=input).delete()
 
 def edit_tweet(request):
     form = TweetForm(request.POST)
@@ -41,13 +49,14 @@ def create_tweet(request):
     form = TweetForm(request.POST)
     if form.is_valid():
         created = TwitterUser.objects.all().filter(username="@superuser").count() != 0
+        number = str(random.uniform(1, 5))
         if not created:
             user = TwitterUser.objects.create(
                 username="@superuser",
                 realname="User Super",
                 following=0,
                 followers=0,
-                profile_picture="img/profilepicture5.jpg",
+                profile_picture="img/profilepicture"+number+".jpg",
             )
             user.save()
         else:
@@ -76,43 +85,44 @@ def create_tweet(request):
         impact.save()
 
 def create_tweet_from_API(request):
+
     input = request.POST.get('param')
-    output = user_api.get_tweets(input)
+    if input != None:
+        output = user_api.get_tweets(input)
+        created = TwitterUser.objects.all().filter(username="@"+output["Username"]).count() != 0
+        if not created:
+            user = TwitterUser.objects.create(
+                username="@"+output["Username"],
+                realname=output["Real Name"],
+                following=0,
+                followers=0,
+                profile_picture="img/profilepicture5.jpg",
+            )
+            user.save()
+        else:
+            user = TwitterUser.objects.get(username="@"+output["Username"])
 
-    created = TwitterUser.objects.all().filter(username="@"+output["Username"]).count() != 0
-    if not created:
-        user = TwitterUser.objects.create(
-            username="@"+output["Username"],
-            realname=output["Real Name"],
-            following=0,
-            followers=0,
-            profile_picture="img/profilepicture5.jpg",
+        hashtags, text = find_hashtags_from_API(output["Text"])
+        tweet = Tweet.objects.create(
+            id_tweet=random.randrange(0, 999999999999),
+            text=text[:len(text)-1],
+            user=user
         )
-        user.save()
-    else:
-        user = TwitterUser.objects.get(username="@"+output["Username"])
 
-    hashtags, text = find_hashtags_from_API(output["Text"])
-    tweet = Tweet.objects.create(
-        id_tweet=random.randrange(0, 999999999999),
-        text=text,
-        user=user
-    )
-
-    tweet.hashtag_in_tweet.set(hashtags)
-    tweet.save()
-    impact = Impact.objects.create(
-        tweet=tweet,
-        stat=Statistics.objects.get(type_stat="RT"),
-        stat_value=int(output["RT"])
-    )
-    impact.save()
-    impact = Impact.objects.create(
-        tweet=tweet,
-        stat=Statistics.objects.get(type_stat="FAV"),
-        stat_value=int(output["FAV"])
-    )
-    impact.save()
+        tweet.hashtag_in_tweet.set(hashtags)
+        tweet.save()
+        impact = Impact.objects.create(
+            tweet=tweet,
+            stat=Statistics.objects.get(type_stat="RT"),
+            stat_value=int(output["RT"])
+        )
+        impact.save()
+        impact = Impact.objects.create(
+            tweet=tweet,
+            stat=Statistics.objects.get(type_stat="FAV"),
+            stat_value=int(output["FAV"])
+        )
+        impact.save()
 
 def find_hashtags_from_API(hashtags):
     word_array = hashtags.split()
