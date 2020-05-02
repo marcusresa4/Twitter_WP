@@ -14,3 +14,11 @@ Feature: Create a Tweet
       | text                    |
       | This is my first Tweet  |
     And There are 1 Tweet's
+
+  Scenario: Try to create tweet but not logged in
+  Given I'm not logged in
+  When I create tweet
+    | test        |
+    | This is my first Tweet  |
+  Then I'm redirected to the login form
+  And There are 0 tweets
