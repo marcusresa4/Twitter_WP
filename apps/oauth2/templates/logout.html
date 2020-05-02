@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+ 	<meta charset="utf-8">
+
+ 	<title>OAuth2 Authentication</title>
+
+ 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="jumbotron">
+ 		<h1>Logged out!</h1>
+        <a class="btn btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">Click here to login again</a>
+		<a class="btn btn-primary" href="{% url 'feed' %}">
+ 			Go to Twitter 2.0 by i4Ventures without logging in
+ 		</a>
+</div>
+</body>
