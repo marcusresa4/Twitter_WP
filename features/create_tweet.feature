@@ -4,10 +4,9 @@ Feature: Create a Tweet
   I want to create a tweet with its hashtags
 
   Background: There is a registered user
-    Given Exists a user logged {username} {name} {surname} {password}
-
+    Given Exists a user logged "username" "name" "surname" "password"
   Scenario: Create a Tweet
-    Given That {username} is logged in
+    Given That "username" is logged in
     When I create a Tweet
       | text                    |
       | This is my first Tweet  |

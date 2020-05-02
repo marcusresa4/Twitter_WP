@@ -20,3 +20,9 @@ def step_impl(context, username):
     c = Client()
     user = User.objects.get(username=username)
     c.force_login(user)
+
+
+@given('I\'m not logged in')
+def step_impl(context):
+    context.browser.visit(context.get_url('logout') + '?next=/myrestaurants/')
+    assert context.browser.is_text_present('login')
