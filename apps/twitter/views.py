@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from apps.twitter.models import Tweet, TwitterUser, Statistics, Impact, Hashtag
+from apps.twitter.models import Tweet, TwitterUser, Statistics, Impact, Hashtag, Rating
 from . import user_api
 from apps.twitter.forms import TweetForm
 import random
@@ -15,18 +15,28 @@ def twitter(request):
             edit_tweet(request)
         elif "Delete Tweet" in request.POST:
             delete_tweet(request)
+        for i in range(5+1):
+            if "Rate"+str(i) in request.POST:
+                edit_rating(request, i, "Rate"+str(i))
 
     tweets = Tweet.objects.all()
     impacts = Impact.objects.all()
     form = TweetForm()
+    rating = Rating.objects.all()
 
     context = { 'tweets'    : tweets,
                 'impacts'   : impacts,
-                'form'      : form
+                'form'      : form,
+                'rating'    : rating
     }
 
     return render(request, 'feed.html', context)
 
+def edit_rating(request, rate, name):
+    id_tweet = request.POST.get(name)
+    rating_to_edit = Rating.objects.all().get(tweet_id=id_tweet)
+    rating_to_edit.rate = rate
+    rating_to_edit.save()
 
 def delete_tweet(request):
     input = request.POST.get('param')
@@ -67,9 +77,16 @@ def create_tweet(request):
             text=form.cleaned_data['text'],
             user=user
         )
+
         hashtags = create_hashtags(form)
         tweet.hashtag_in_tweet.set(hashtags)
         tweet.save()
+
+        rating = Rating.objects.create(
+            rate=0,
+            tweet=tweet
+        )
+        rating.save()
 
         impact = Impact.objects.create(
             tweet=tweet,
@@ -172,10 +189,12 @@ def twitteruser(request, username):
         username__contains=username
     )
     impacts = Impact.objects.all()
+    ratings = Rating.objects.all()
     context = {
         'users': user,
         'tweets': tweets,
-        'impacts' : impacts
+        'impacts' : impacts,
+        'rating' : ratings
     }
 
     return render(request, 'tweets_user.html', context)
@@ -186,10 +205,13 @@ def twitterhashtag(request, hashtag):
         hashtag_in_tweet__hashtag__contains=hashtag)
 
     impacts = Impact.objects.all()
+    ratings = Rating.objects.all()
+
     context = {
         'hashtag': hashtag,
         'tweets': tweets,
-        'impacts' : impacts
+        'impacts' : impacts,
+        'rating' : ratings
     }
 
     return render(request, 'tweets_hashtag.html', context)

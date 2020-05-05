@@ -20,7 +20,7 @@
 <br>
     {% for tweet in tweets %}
 
-    <div class="media" style="margin-left: 10%">
+    <div class="media" style="margin-left: 10%; margin-right: 25%; background-color: #FEFEFE">
       <img src="{% static tweet.user.profile_picture %}" class="mr-3 picture_size" alt="profile_picture" style="width: 35px;height: 35px">
       <div class="media-body">
         <h5 class="mt-0"><a style="color: rgba(0,0,0,0.76)" href="{% url 'tweets_user' tweet.user.username %}">{{ tweet.user.realname }}</a>&nbsp;<div style="font-size:smaller; color: rgba(145,162,184,0.58);">{{ tweet.user.username }}</div></h5>
@@ -40,6 +40,56 @@
                         <a style="font-size: small ; color: dimgrey;">FAV: {{ impact.stat_value }}</a>
                   {% endif %}
               {%  endfor %}
+      <br>
+      <div style="margin-top: 5px">
+      <form name="Rating" method="POST">
+          {% csrf_token %}
+      <a class="btn-group">
+          <button type="submit" name="Rate" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Rate It!
+          </button>
+          <div class="dropdown-menu">
+              <button class="dropdown-item" name="Rate1" type="submit" value="{{ tweet.id_tweet }}">1 STARS</button>
+              <button class="dropdown-item" name="Rate2" type="submit" value="{{ tweet.id_tweet }}">2 STARS</button>
+              <button class="dropdown-item" name="Rate3" type="submit" value="{{ tweet.id_tweet }}">3 STARS</button>
+              <button class="dropdown-item" name="Rate4" type="submit" value="{{ tweet.id_tweet }}">4 STARS</button>
+              <button class="dropdown-item" name="Rate5" type="submit" value="{{ tweet.id_tweet }}">5 STARS</button>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item" name="Rate0" type="submit" value="{{ tweet.id_tweet}} ">No Rating</button>
+          </div>
+      </a>
+      </form>
+
+       {% for rate in rating %}
+        {% if rate.tweet.id_tweet == tweet.id_tweet %}
+            {% if rate.rate == 1 %}
+                {% with url="img/1-STARS.png" %}
+                    <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+                {% endwith %}
+                {% endif %}
+            {% if rate.rate == 2 %}
+                {% with url="img/2-STARS.png" %}
+                    <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+                {% endwith %}
+                {% endif %}
+            {% if rate.rate == 3 %}
+                {% with url="img/3-STARS.png" %}
+                    <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+                {% endwith %}
+                {% endif %}
+            {% if rate.rate == 4 %}
+                {% with url="img/4-STARS.png" %}
+                    <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+                {% endwith %}
+                {% endif %}
+            {% if rate.rate == 5 %}
+                {% with url="img/5-STARS.png" %}
+                    <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+                {% endwith %}
+                {% endif %}
+        {% endif %}
+        {% endfor %}
+      </div>
       </div>
     </div>
          <br>

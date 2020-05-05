@@ -3,7 +3,7 @@
 
 {% block page_content %}
 <nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="{% url 'feed' %}">Twitter Monitoring by i4Ventures</a>
+  <a class="navbar-brand" href="{% url 'feed' %}">Twitter 2.0 by i4Ventures</a>
    <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary ">Log Out</button></a>
 </nav>
 
@@ -43,6 +43,36 @@
                         <a style="font-size: small ; color: dimgrey;">FAV: {{ impact.stat_value }}</a>
                   {% endif %}
               {%  endfor %}
+    <br>
+    {% for rate in rating %}
+        {% if rate.tweet.id_tweet == tweet.id_tweet %}
+            {% if rate.rate == 1 %}
+                {% with url="img/1-STARS.png" %}
+                    <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+                {% endwith %}
+                {% endif %}
+            {% if rate.rate == 2 %}
+                {% with url="img/2-STARS.png" %}
+                    <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+                {% endwith %}
+                {% endif %}
+            {% if rate.rate == 3 %}
+                {% with url="img/3-STARS.png" %}
+                    <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+                {% endwith %}
+                {% endif %}
+            {% if rate.rate == 4 %}
+                {% with url="img/4-STARS.png" %}
+                    <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+                {% endwith %}
+                {% endif %}
+            {% if rate.rate == 5 %}
+                {% with url="img/5-STARS.png" %}
+                    <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+                {% endwith %}
+                {% endif %}
+        {% endif %}
+        {% endfor %}
       </div>
     </div>
          <br>
