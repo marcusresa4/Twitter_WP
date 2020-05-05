@@ -105,7 +105,10 @@ def create_tweet_from_API(request):
 
     input = request.POST.get('param')
     if input != None:
-        output = user_api.get_tweets(input)
+        try:
+            output = user_api.get_tweets(input)
+        except:
+            return
         created = TwitterUser.objects.all().filter(username="@"+output["Username"]).count() != 0
         if not created:
             user = TwitterUser.objects.create(
@@ -128,6 +131,12 @@ def create_tweet_from_API(request):
 
         tweet.hashtag_in_tweet.set(hashtags)
         tweet.save()
+        rating = Rating.objects.create(
+            rate=0,
+            tweet=tweet
+        )
+        rating.save()
+
         impact = Impact.objects.create(
             tweet=tweet,
             stat=Statistics.objects.get(type_stat="RT"),
@@ -164,22 +173,6 @@ def create_hashtags(form):
         hashtag.append(hashtags)
 
     return hashtag
-
-
-
-def external(request):
-    input = request.POST.get('param')
-    try:
-        output = user_api.get_tweets(input)
-    except:
-        output = "ERROR!!!!"
-
-    context = {
-        'data' : output
-    }
-
-    return render(request, 'api.html', context)
-
 
 def twitteruser(request, username):
     tweets = Tweet.objects.filter(
