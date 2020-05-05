@@ -34,6 +34,9 @@ class Statistics(models.Model):
     def __str__(self):
         return self.type_stat
 
+class Rating(models.Model):
+    rate = models.IntegerField()
+    tweet = models.ForeignKey('Tweet', on_delete=models.CASCADE)
 
 class Impact(models.Model):
     tweet = models.ForeignKey('Tweet', on_delete=models.CASCADE)

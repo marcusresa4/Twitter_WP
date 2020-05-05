@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 
-from apps.twitter.models import Tweet, Hashtag, TwitterUser, Statistics, Impact
+from apps.twitter.models import Tweet, Hashtag, TwitterUser, Statistics, Impact, Rating
 
 class UserAdmin(admin.ModelAdmin):
     pass
@@ -21,8 +21,12 @@ class ImpactAdmin(admin.ModelAdmin):
 class TwitterUserAdmin(admin.ModelAdmin):
     pass
 
+class RatingAdmin(admin.ModelAdmin):
+    pass
+
 admin.site.register(Tweet, TweetAdmin)
 admin.site.register(Hashtag, HashtagAdmin)
 admin.site.register(Statistics, StatisticsAdmin)
 admin.site.register(Impact, ImpactAdmin)
 admin.site.register(TwitterUser, TwitterUserAdmin)
+admin.site.register(Rating, RatingAdmin)
