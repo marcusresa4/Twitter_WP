@@ -7,11 +7,11 @@ Feature: Create a Tweet
     Given Exists a user logged {username} {name} {surname} {password}
 
   Scenario: Create a Tweet
-    Given That {username} is logged in
+    Given I login as user "{username}" with password "{password}"
     When I create a Tweet
-      | text                    |
-      | This is my first Tweet  |
-    Then I'm viewing the tweet created by user
+      | text                    | hashtag   |
+      | This is my first Tweet  | #first    |
+    Then I'm viewing the tweet created by {user}
       | text                    |
       | This is my first Tweet  |
     And There are 1 Tweet's
