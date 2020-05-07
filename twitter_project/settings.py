@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'apps.twitter',
     'social_django',
     'apps.oauth2',
+    'behave_django',
 ]
 
 MIDDLEWARE = [
