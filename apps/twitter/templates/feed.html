@@ -148,7 +148,7 @@
     </div>
   </div>
   <div class="card">
-    <div class="card-header" id="headingThree">
+    <div class="card-header" id="headingThreeEdit">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
           Edit Tweet
@@ -171,14 +171,14 @@
       </div>
          Tweet's body:
          <div class="form-group">
-            {{ form.text }}
+            {{ editform.edit_text }}
          </div>
             Insert Hashtags separated by blank space:
         <div class="form-group">
-            {{ form.hashtag_in_tweet }}
+            {{ editform.edit_hashtag_in_tweet }}
         </div>
 
-    <input type="submit" class="btn btn-primary" name="Edit Tweet" value="Edit Tweet">
+      <button type="submit" class="btn btn-primary" name="Edit Tweet" value="Edit Tweet">Edit Tweet</button>
     </form>
 
     </div>

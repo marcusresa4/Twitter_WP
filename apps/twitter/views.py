@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from apps.twitter.models import Tweet, TwitterUser, Statistics, Impact, Hashtag, Rating
 from . import user_api
-from apps.twitter.forms import TweetForm
+from apps.twitter.forms import TweetForm, EditTweetForm
 import random
 
 
@@ -22,11 +22,13 @@ def twitter(request):
     tweets = Tweet.objects.all()
     impacts = Impact.objects.all()
     form = TweetForm()
+    form_edit = EditTweetForm()
     rating = Rating.objects.all()
 
     context = { 'tweets'    : tweets,
                 'impacts'   : impacts,
                 'form'      : form,
+                'editform'  : form_edit,
                 'rating'    : rating
     }
 
@@ -45,13 +47,13 @@ def delete_tweet(request):
         Tweet.objects.all().filter(text=input).delete()
 
 def edit_tweet(request):
-    form = TweetForm(request.POST)
+    form = EditTweetForm(request.POST)
     if form.is_valid():
         input = request.POST.get('param')
         print(input)
         tweet_to_edit = Tweet.objects.all().get(text=input)
-        tweet_to_edit.text = form.cleaned_data['text']
-        hashtags = create_hashtags(form)
+        tweet_to_edit.text = form.cleaned_data['edit_text']
+        hashtags = create_hashtags_edit(form)
         tweet_to_edit.hashtag_in_tweet.set(hashtags)
         tweet_to_edit.save()
 
@@ -59,7 +61,7 @@ def create_tweet(request):
     form = TweetForm(request.POST)
     if form.is_valid():
         created = TwitterUser.objects.all().filter(username="@superuser").count() != 0
-        number = str(random.uniform(1, 5))
+        number = str(random.random()%5 + 1)
         if not created:
             user = TwitterUser.objects.create(
                 username="@superuser",
@@ -168,6 +170,15 @@ def find_hashtags_from_API(hashtags):
 def create_hashtags(form):
     hashtag = []
     hashtags_str = form.cleaned_data['hashtag_in_tweet'].split()
+    for ht in hashtags_str:
+        hashtags, created = Hashtag.objects.get_or_create(hashtag=ht)
+        hashtag.append(hashtags)
+
+    return hashtag
+
+def create_hashtags_edit(form):
+    hashtag = []
+    hashtags_str = form.cleaned_data['edit_hashtag_in_tweet'].split()
     for ht in hashtags_str:
         hashtags, created = Hashtag.objects.get_or_create(hashtag=ht)
         hashtag.append(hashtags)
