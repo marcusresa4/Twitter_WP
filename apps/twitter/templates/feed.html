@@ -4,211 +4,213 @@
 
 {% if user.is_authenticated %}
 <nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="{% url 'feed' %}">Twitter 2.0 by i4Ventures</a>
-   <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary ">Log Out</button></a>
+    <a class="navbar-brand" href="{% url 'feed' %}">Twitter 2.0 by i4Ventures</a>
+    <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary ">Log Out</button></a>
 </nav>
 {% else %}
 
 <nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="{% url 'feed' %}">Twitter 2.0 by i4Ventures</a>
-   <a href="{% url 'social:begin' 'google-oauth2' %}"><button type="button" class="btn btn-outline-primary ">Log In</button></a>
+    <a class="navbar-brand" href="{% url 'feed' %}">Twitter 2.0 by i4Ventures</a>
+    <a href="{% url 'social:begin' 'google-oauth2' %}"><button type="button" class="btn btn-outline-primary ">Log In</button></a>
 </nav>
 
 {% endif %}
 
-    <h2 style="margin-left: 30%;margin-top: 20px">All the Tweets</h2>
+<h2 style="margin-left: 30%;margin-top: 20px">All the Tweets</h2>
 <br>
-    {% for tweet in tweets %}
+{% for tweet in tweets %}
 
-    <div class="media" style="margin-left: 10%; margin-right: 25%; background-color: #FEFEFE">
-      <img src="{% static tweet.user.profile_picture %}" class="mr-3 picture_size" alt="profile_picture" style="width: 35px;height: 35px">
-      <div class="media-body">
+<div class="media" style="margin-left: 10%; margin-right: 25%; background-color: #FEFEFE">
+    <img src="{% static tweet.user.profile_picture %}" class="mr-3 picture_size" alt="profile_picture" style="width: 35px;height: 35px">
+    <div class="media-body">
         <h5 class="mt-0"><a style="color: rgba(0,0,0,0.76)" href="{% url 'tweets_user' tweet.user.username %}">{{ tweet.user.realname }}</a>&nbsp;<div style="font-size:smaller; color: rgba(145,162,184,0.58);">{{ tweet.user.username }}</div></h5>
         {{ tweet.text }}
-          {% for hashtags in tweet.hashtag_in_tweet.all %}
-              <a href="{% url 'tweets_hashtag' hashtags.hashtag %}">
-                {{ hashtags.hashtag }}
+        {% for hashtags in tweet.hashtag_in_tweet.all %}
+        <a href="{% url 'tweets_hashtag' hashtags.hashtag %}">
+            {{ hashtags.hashtag }}
             {% endfor %}
-              </a>&nbsp;
-              <br>
-              {% for impact in impacts %}
-                    {% if impact.tweet.id_tweet == tweet.id_tweet and impact.stat.type_stat == "RT" %}
-                        <a style="font-size: small ; color: dimgrey;">RT: {{ impact.stat_value }}</a>
+        </a>&nbsp;
+        <br>
+        {% for impact in impacts %}
+        {% if impact.tweet.id_tweet == tweet.id_tweet and impact.stat.type_stat == "RT" %}
+        <a style="font-size: small ; color: dimgrey;">RT: {{ impact.stat_value }}</a>
 
-                    {% endif %}
-                      {% if impact.tweet.id_tweet == tweet.id_tweet and impact.stat.type_stat == "FAV" %}
-                        <a style="font-size: small ; color: dimgrey;">FAV: {{ impact.stat_value }}</a>
-                  {% endif %}
-              {%  endfor %}
-      <br>
-      <div style="margin-top: 5px">
-      <form name="Rating" method="POST">
-          {% csrf_token %}
-      <a class="btn-group">
-          <button type="submit" name="Rate" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Rate It!
-          </button>
-          <div class="dropdown-menu">
-              <button class="dropdown-item" name="Rate1" type="submit" value="{{ tweet.id_tweet }}">1 STARS</button>
-              <button class="dropdown-item" name="Rate2" type="submit" value="{{ tweet.id_tweet }}">2 STARS</button>
-              <button class="dropdown-item" name="Rate3" type="submit" value="{{ tweet.id_tweet }}">3 STARS</button>
-              <button class="dropdown-item" name="Rate4" type="submit" value="{{ tweet.id_tweet }}">4 STARS</button>
-              <button class="dropdown-item" name="Rate5" type="submit" value="{{ tweet.id_tweet }}">5 STARS</button>
-              <div class="dropdown-divider"></div>
-              <button class="dropdown-item" name="Rate0" type="submit" value="{{ tweet.id_tweet}} ">No Rating</button>
-          </div>
-      </a>
-      </form>
-
-       {% for rate in rating %}
-        {% if rate.tweet.id_tweet == tweet.id_tweet %}
-            {% if rate.rate == 1 %}
-                {% with url="img/1-STARS.png" %}
-                    <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
-                {% endwith %}
-                {% endif %}
-            {% if rate.rate == 2 %}
-                {% with url="img/2-STARS.png" %}
-                    <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
-                {% endwith %}
-                {% endif %}
-            {% if rate.rate == 3 %}
-                {% with url="img/3-STARS.png" %}
-                    <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
-                {% endwith %}
-                {% endif %}
-            {% if rate.rate == 4 %}
-                {% with url="img/4-STARS.png" %}
-                    <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
-                {% endwith %}
-                {% endif %}
-            {% if rate.rate == 5 %}
-                {% with url="img/5-STARS.png" %}
-                    <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
-                {% endwith %}
-                {% endif %}
         {% endif %}
-        {% endfor %}
-      </div>
-      </div>
-    </div>
-         <br>
-    {% endfor %}
+        {% if impact.tweet.id_tweet == tweet.id_tweet and impact.stat.type_stat == "FAV" %}
+        <a style="font-size: small ; color: dimgrey;">FAV: {{ impact.stat_value }}</a>
+        {% endif %}
+        {%  endfor %}
+        <br>
+        {% if user.is_authenticated %}
+        <div style="margin-top: 5px">
+            <form name="Rating" method="POST">
+                {% csrf_token %}
+                <div class="btn-group">
+                    <button type="submit" name="Rate" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Rate It!
+                    </button>
+                    <div class="dropdown-menu">
+                        <button class="dropdown-item" name="Rate1" type="submit" value="{{ tweet.id_tweet }}">1 STARS</button>
+                        <button class="dropdown-item" name="Rate2" type="submit" value="{{ tweet.id_tweet }}">2 STARS</button>
+                        <button class="dropdown-item" name="Rate3" type="submit" value="{{ tweet.id_tweet }}">3 STARS</button>
+                        <button class="dropdown-item" name="Rate4" type="submit" value="{{ tweet.id_tweet }}">4 STARS</button>
+                        <button class="dropdown-item" name="Rate5" type="submit" value="{{ tweet.id_tweet }}">5 STARS</button>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" name="Rate0" type="submit" value="{{ tweet.id_tweet}} ">No Rating</button>
+                    </div>
+                </div>
+            </form>
 
-    {% if user.is_authenticated %}
-
-    <div class="accordion" id="accordionExample">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h2 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          Create a Tweet from scratch
-        </button>
-      </h2>
-    </div>
-
-    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body">
-            <form action = "" method="post" name="Create Tweet">
-        {% csrf_token %}
-        Tweet's body:
-        <div class="form-group">
-            {{ form.text }}
-        </div>
-                Insert Hashtags separated by blank space:
-        <div class="form-group">
-            {{ form.hashtag_in_tweet }}
-        </div>
-        <input type="submit" class="btn btn-primary" name="Create Tweet" value="Create Tweet">
-        </form>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="card">
-    <div class="card-header" id="headingTwo">
-      <h2 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Get a Tweet from a real Twitter User
-        </button>
-      </h2>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body">
-          <form action = "" method="post">
-        {% csrf_token %}
-        Write a real Twitter username and it will return his/her last Tweet:<br><br>
-            <label>
-                <input type="text" name="param" required>
-            </label><br><br>
-              <button type="submit" class="btn btn-primary" name="API" value="Get Tweet from API">Get Tweet from API</button>
-        </form>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header" id="headingThreeEdit">
-      <h2 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Edit Tweet
-        </button>
-      </h2>
-    </div>
-  <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-  <form action = "" method="post" style="margin-left: 20px">
-  <br>
-  {% csrf_token %}
-      <div class="form-group">
-        <label for="exampleFormControlSelect1">Select Tweet that do you want to edit</label>
-        <select class="form-control" id="exampleFormControlSelect1" name="param">
-          {% for tweet in tweets %}
-              {% if tweet.user.username == "@superuser" %}
-                  <option value="{{ tweet.text }}">{{ tweet.text }}</option>
-              {% endif %}
+            {% for rate in rating %}
+            {% if rate.tweet.id_tweet == tweet.id_tweet %}
+            {% if rate.rate == 1 %}
+            {% with url="img/1-STARS.png" %}
+            <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+            {% endwith %}
+            {% endif %}
+            {% if rate.rate == 2 %}
+            {% with url="img/2-STARS.png" %}
+            <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+            {% endwith %}
+            {% endif %}
+            {% if rate.rate == 3 %}
+            {% with url="img/3-STARS.png" %}
+            <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+            {% endwith %}
+            {% endif %}
+            {% if rate.rate == 4 %}
+            {% with url="img/4-STARS.png" %}
+            <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+            {% endwith %}
+            {% endif %}
+            {% if rate.rate == 5 %}
+            {% with url="img/5-STARS.png" %}
+            <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+            {% endwith %}
+            {% endif %}
+            {% endif %}
             {% endfor %}
-        </select>
-      </div>
-         Tweet's body:
-         <div class="form-group">
-            {{ editform.edit_text }}
-         </div>
-            Insert Hashtags separated by blank space:
-        <div class="form-group">
-            {{ editform.edit_hashtag_in_tweet }}
+        </div>
+        {% endif %}
+    </div>
+</div>
+<br>
+{% endfor %}
+
+{% if user.is_authenticated %}
+
+<div class="accordion" id="accordionExample">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    Create a Tweet from scratch
+                </button>
+            </h2>
         </div>
 
-      <button type="submit" class="btn btn-primary" name="Edit Tweet" value="Edit Tweet">Edit Tweet</button>
-    </form>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+                <form action = "" method="post" name="Create Tweet">
+                    {% csrf_token %}
+                    Tweet's body:
+                    <div class="form-group">
+                        {{ form.text }}
+                    </div>
+                    Insert Hashtags separated by blank space:
+                    <div class="form-group">
+                        {{ form.hashtag_in_tweet }}
+                    </div>
+                    <input type="submit" class="btn btn-primary" name="Create Tweet" value="Create Tweet">
+                </form>
+            </div>
+        </div>
+    </div>
 
+
+    <div class="card">
+        <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Get a Tweet from a real Twitter User
+                </button>
+            </h2>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+                <form action = "" method="post">
+                    {% csrf_token %}
+                    Write a real Twitter username and it will return his/her last Tweet:<br><br>
+                    <label>
+                        <input type="text" name="param" required>
+                    </label><br><br>
+                    <button type="submit" class="btn btn-primary" name="API" value="Get Tweet from API">Get Tweet from API</button>
+                </form>
+            </div>
+        </div>
     </div>
+    <div class="card">
+        <div class="card-header" id="headingThreeEdit">
+            <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Edit Tweet
+                </button>
+            </h2>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <form action = "" method="post" style="margin-left: 20px">
+                <br>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Select Tweet that do you want to edit</label>
+                    <select class="form-control" id="exampleFormControlSelect1" name="param">
+                        {% for tweet in tweets %}
+                        {% if tweet.user.username == "@superuser" %}
+                        <option value="{{ tweet.text }}">{{ tweet.text }}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                Tweet's body:
+                <div class="form-group">
+                    {{ editform.edit_text }}
+                </div>
+                Insert Hashtags separated by blank space:
+                <div class="form-group">
+                    {{ editform.edit_hashtag_in_tweet }}
+                </div>
+
+                <button type="submit" class="btn btn-primary" name="Edit Tweet" value="Edit Tweet">Edit Tweet</button>
+            </form>
+
+        </div>
     </div>
-    </div>
-        <div class="card-header" id="headingThree">
-      <h2 class="mb-0">
+</div>
+<div class="card-header" id="headingThree">
+    <h2 class="mb-0">
         <button class="btn btn-link collapsed">
-          Delete Tweet
+            Delete Tweet
         </button>
-      </h2>
-    </div>
-    <div style="margin-left: 20px">
+    </h2>
+</div>
+<div style="margin-left: 20px">
     <br>
-      <form action = "" method="post">
-      {% csrf_token %}
-          <div class="form-group">
+    <form action = "" method="post">
+        {% csrf_token %}
+        <div class="form-group">
             <label for="exampleFormControlSelect1">Select Tweet that do you want to delete</label>
             <select class="form-control" id="exampleFormControlSelect1" name="param">
-              {% for tweet in tweets %}
-                      <option>{{ tweet.text }}</option>
+                {% for tweet in tweets %}
+                <option>{{ tweet.text }}</option>
                 {% endfor %}
             </select>
-          </div>
+        </div>
 
         <input type="submit" class="btn btn-primary" name="Delete Tweet" value="Delete Tweet">
-        </form>
-    </div>
+    </form>
+</div>
 
-    {% endif %}
+{% endif %}
 
-    <br>
+<br>
 {% endblock %}

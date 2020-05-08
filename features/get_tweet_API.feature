@@ -27,3 +27,10 @@ Feature: Create a Tweet
       |user         |
       |marcusresa4  |
     Then There are 0 Tweet's
+
+  Scenario: Get a Tweet from a private Twitter user
+    Given I'm not logged in
+    When I get a Tweet from API
+      |user         |
+      |Twitter      |
+    Then There are 0 Tweet's
