@@ -139,9 +139,9 @@
           <form action = "" method="post">
         {% csrf_token %}
         Write a real Twitter username and it will return his/her last Tweet:<br><br>
-            <label>
-                <input type="text" name="param" required>
-            </label><br><br>
+              <div class="form-group">
+            {{ apiform.username }}
+         </div><br><br>
               <button type="submit" class="btn btn-primary" name="API" value="Get Tweet from API">Get Tweet from API</button>
         </form>
       </div>

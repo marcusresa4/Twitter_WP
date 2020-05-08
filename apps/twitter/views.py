@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from apps.twitter.models import Tweet, TwitterUser, Statistics, Impact, Hashtag, Rating
 from . import user_api
-from apps.twitter.forms import TweetForm, EditTweetForm
+from apps.twitter.forms import TweetForm, EditTweetForm, APIForm
 import random
 
 
@@ -41,12 +41,14 @@ def twitter(request):
     impacts = Impact.objects.all()
     form = TweetForm()
     form_edit = EditTweetForm()
+    api_form = APIForm()
     rating = Rating.objects.all()
 
     context = { 'tweets'    : tweets,
                 'impacts'   : impacts,
                 'form'      : form,
                 'editform'  : form_edit,
+                'apiform'   : api_form,
                 'rating'    : rating
     }
 
@@ -123,8 +125,9 @@ def create_tweet(request):
 
 def create_tweet_from_API(request):
 
-    input = request.POST.get('param')
-    if input != None:
+    form = APIForm(request.POST)
+    if form.is_valid():
+        input = form.cleaned_data['username']
         try:
             output = user_api.get_tweets(input)
         except:
