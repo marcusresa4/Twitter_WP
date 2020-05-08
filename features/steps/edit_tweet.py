@@ -17,7 +17,7 @@ def step_impl(context):
     x.save()
     i = 1
     for row in context.table:
-        if i == 1:
+        if i % 2 == 1:
             try:
                 context.browser.find_by_xpath('//*[@id="headingOne"]/h2/button').click()
                 time.sleep(0.2)
@@ -31,7 +31,7 @@ def step_impl(context):
             except:
                 return
 
-        elif i == 2:
+        elif i % 2 == 0:
             print("ROW 2 :", end="")
             print(row)
             context.browser.find_by_xpath('//*[@id="headingThreeEdit"]/h2/button').click()
@@ -41,4 +41,5 @@ def step_impl(context):
             context.browser.find_by_xpath('//*[@id="id_edit_hashtag_in_tweet"]').fill(row[1])
             time.sleep(1)
             context.browser.find_by_xpath('//*[@id="collapseThree"]/form/button').click()
+            i+=1
             #Tweet Edited
