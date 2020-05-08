@@ -15,13 +15,15 @@ def step_impl(context):
     x.save()
     x = Statistics.objects.create(type_stat="FAV")
     x.save()
+    i=1
     for row in context.table:
         try:
-            context.browser.find_by_xpath('//*[@id="headingTwo"]/h2/button').click()
-            time.sleep(0.2)
-            context.browser.find_by_xpath('//*[@id="collapseOne"]/div/form/label/input').fill(row[0])
-            time.sleep(0.2)
-            context.browser.find_by_xpath('//*[@id="collapseOne"]/div/form/button').click()
+            context.browser.find_by_xpath('/html/body/div['+str(i)+']/div[2]/div[1]/h2/button').click()
+            time.sleep(2)
+            context.browser.find_by_xpath('/html/body/div['+str(i)+']/div[2]/div[2]/div/form/label/input').fill(row[0])
+            time.sleep(2)
+            context.browser.find_by_xpath('/html/body/div['+str(i)+']/div[2]/div[2]/div/form/button').click()
             time.sleep(0.2)
         except ElementDoesNotExist:
             pass
+        i+=1
