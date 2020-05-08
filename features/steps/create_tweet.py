@@ -44,4 +44,5 @@ def step_impl(context, user, num):
 @then('There are {count:n} Tweet\'s')
 def step_impl(context, count):
     from apps.twitter.models import Tweet
+    print(Tweet.objects.count())
     assert count == Tweet.objects.count()
