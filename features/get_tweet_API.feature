@@ -9,29 +9,21 @@ Feature: Create a Tweet
   Scenario: Get a Tweet from Twitter
     Given I login as user "{username}" with password "{password}"
     When I get a Tweet from API
-      |user   |
-      |Twitter|
+      |user      |
+      |Twitter   |
     Then There are 1 Tweet's
 
   Scenario: Get multiple Tweets from Twitter
     Given I login as user "{username}" with password "{password}"
     When I get a Tweet from API
-      |user   |
-      |Twitter|
+      |user         |
+      |Twitter      |
       |TwitterEspana|
     Then There are 2 Tweet's
 
-    Scenario: Get a Tweet from a private Twitter user
+  Scenario: Get a Tweet from a private Twitter user
     Given I login as user "{username}" with password "{password}"
     When I get a Tweet from API
-      |user   |
-      |marcusresa4|
-    Then There are 0 Tweet's
-
-
-        Scenario: Get a Tweet without being logged
-    Given I'm not logged in
-    When I get a Tweet from API
-      |user   |
-      |marcusresa4|
+      |user         |
+      |marcusresa4  |
     Then There are 0 Tweet's
