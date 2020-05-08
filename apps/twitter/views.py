@@ -1,9 +1,27 @@
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.shortcuts import render
 from apps.twitter.models import Tweet, TwitterUser, Statistics, Impact, Hashtag, Rating
 from . import user_api
 from apps.twitter.forms import TweetForm, EditTweetForm
 import random
 
+
+def twitter_after_form(request):
+    tweets = Tweet.objects.all()
+    impacts = Impact.objects.all()
+    form = TweetForm()
+    form_edit = EditTweetForm()
+    rating = Rating.objects.all()
+
+    context = { 'tweets'    : tweets,
+                'impacts'   : impacts,
+                'form'      : form,
+                'editform'  : form_edit,
+                'rating'    : rating
+    }
+
+    return render(request, 'feed.html', context)
 
 def twitter(request):
     if request.method == 'POST':

@@ -164,7 +164,7 @@
         <select class="form-control" id="exampleFormControlSelect1" name="param">
           {% for tweet in tweets %}
               {% if tweet.user.username == "@superuser" %}
-                  <option>{{ tweet.text }}</option>
+                  <option value="{{ tweet.text }}">{{ tweet.text }}</option>
               {% endif %}
             {% endfor %}
         </select>

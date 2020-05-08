@@ -19,13 +19,13 @@ def step_impl(context):
     for row in context.table:
         try:
             context.browser.find_by_xpath('//*[@id="headingOne"]/h2/button').click()
-            time.sleep(1)
+            time.sleep(0.2)
             context.browser.find_by_xpath('//*[@id="id_text"]').fill(row[0])
-            time.sleep(1)
+            time.sleep(0.2)
             context.browser.find_by_xpath('//*[@id="id_hashtag_in_tweet"]').fill(row[1])
-            time.sleep(1)
+            time.sleep(0.2)
             context.browser.find_by_xpath('//*[@id="collapseOne"]/div/form/input[2]').click()
-            time.sleep(1)
+            time.sleep(0.2)
         except ElementDoesNotExist:
             pass
 
@@ -33,8 +33,9 @@ def step_impl(context):
 @then('I\'m viewing {num:n} tweet created by {user}')
 def step_impl(context, user, num):
     ok=0
+    from apps.twitter.models import Tweet
+    print([x.text for x in Tweet.objects.all()])
     for row in context.table:
-        from apps.twitter.models import Tweet
         if(len(Tweet.objects.filter(text=row[0])) == 1):
             ok+=1
     assert ok == num

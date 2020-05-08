@@ -32,14 +32,25 @@ def step_impl(context):
                 return
 
         elif i % 2 == 0:
-            print("ROW 2 :", end="")
-            print(row)
             context.browser.find_by_xpath('//*[@id="headingThreeEdit"]/h2/button').click()
-            time.sleep(1)
+            time.sleep(0.2)
             context.browser.find_by_xpath('//*[@id="id_edit_text"]').fill(row[0])
-            time.sleep(1)
+            time.sleep(0.2)
             context.browser.find_by_xpath('//*[@id="id_edit_hashtag_in_tweet"]').fill(row[1])
-            time.sleep(1)
+            time.sleep(0.2)
             context.browser.find_by_xpath('//*[@id="collapseThree"]/form/button').click()
             i+=1
             #Tweet Edited
+
+@when('I edit the tweet')
+def step_impl(context):
+    try:
+        context.browser.find_by_xpath('//*[@id="headingThreeEdit"]/h2/button').click()
+        time.sleep(0.2)
+        context.browser.find_by_xpath('//*[@id="id_edit_text"]').fill(context.table[1][0])
+        time.sleep(0.2)
+        context.browser.find_by_xpath('//*[@id="id_edit_hashtag_in_tweet"]').fill(context.table[1][1])
+        time.sleep(0.2)
+        context.browser.find_by_xpath('//*[@id="collapseThree"]/form/button').click()
+    except ElementDoesNotExist:
+        pass
