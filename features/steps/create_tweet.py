@@ -19,11 +19,11 @@ def step_impl(context):
     for row in context.table:
         try:
             context.browser.find_by_xpath('//*[@id="headingOne"]/h2/button').click()
-            time.sleep(1)
+            time.sleep(0.2)
             context.browser.find_by_xpath('//*[@id="id_text"]').fill(context.table[0][0])
-            time.sleep(1)
+            time.sleep(0.2)
             context.browser.find_by_xpath('//*[@id="id_hashtag_in_tweet"]').fill(context.table[0][1])
-            time.sleep(1)
+            time.sleep(0.2)
             context.browser.find_by_xpath('//*[@id="collapseOne"]/div/form/input[2]').click()
         except ElementDoesNotExist:
             pass
