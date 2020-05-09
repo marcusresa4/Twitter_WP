@@ -13,6 +13,7 @@ class TweetForm(forms.Form):
 
     hashtag_in_tweet = forms.CharField(
         max_length=280,
+        required=False,
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
@@ -33,6 +34,7 @@ class EditTweetForm(forms.Form):
     )
     edit_hashtag_in_tweet = forms.CharField(
         max_length=280,
+        required=False,
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',

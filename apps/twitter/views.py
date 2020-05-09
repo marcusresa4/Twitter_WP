@@ -79,11 +79,11 @@ def create_tweet(request):
     form = TweetForm(request.POST)
     if form.is_valid():
         created = TwitterUser.objects.all().filter(username="@superuser").count() != 0
-        number = str(random.random()%5 + 1)
+        number = str((random.randint(1, 5)))
         if not created:
             user = TwitterUser.objects.create(
                 username="@superuser",
-                realname="User Super",
+                realname="Super User",
                 following=0,
                 followers=0,
                 profile_picture="img/profilepicture"+number+".jpg",

@@ -12,4 +12,3 @@ Feature: Rate a Tweet
       | text                    | hashtag   |
       | This is my first Tweet  | #first    |
     Then I'm viewing a tweet with 3 stars
-    #Then I'm viewing 1 tweet created by {user} with 3 stars

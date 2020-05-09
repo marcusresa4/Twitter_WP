@@ -16,6 +16,17 @@ Feature: Edit Tweet
       | This is my edited Tweet  |
     And There are 1 Tweet's
 
+      Scenario: Edit a Tweet without adding a hashtag
+    Given I login as user "{username}" with password "{password}"
+    When I create and edit a Tweet
+      | text                     | hashtag    |
+      | This is my first Tweet   | #create    |
+      | This is my edited Tweet  |            |
+    Then I'm viewing 1 tweet created by {user}
+      | text                     |
+      | This is my edited Tweet  |
+    And There are 1 Tweet's
+
       Scenario: Create 3 Tweets edit one
     Given I login as user "{username}" with password "{password}"
     When I create a Tweet
