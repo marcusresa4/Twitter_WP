@@ -4,7 +4,7 @@ Twitter Monitoring shows the impact produced as a consequence of the tweets whic
 ## Getting Started
 Our project is in a GitHub repository, [Twitter-Monitoring](https://github.com/marcusresa4/Twitter_WP).
 
-There is a branch called [first-assignment](https://github.com/marcusresa4/Twitter_WP/tree/first-assignment) where there is the SQLiteDB and the .env file, the first file is necessary in order to see all the entitites created by us and be able to navigate through the Web App. Following the [12factor](https://12factor.net/) guideline The .env file contains all the KEYS so it's indispensable to be in the repo when you run it.
+There is a branch called [second-assignment](https://github.com/marcusresa4/Twitter_WP/tree/second-assignment) where there is the SQLiteDB and the .env file, the first file is necessary in order to see all the entitites created by us and be able to navigate through the Web App. Following the [12factor](https://12factor.net/) guideline The .env file contains all the KEYS so it's indispensable to be in the repo when you run it.
 ### Prerequisites
     Docker or Docker Toolbox
 You must be logged on docker, otherwise you would not be able to run it.
@@ -33,6 +33,8 @@ Moreover, our web was been deployed on Heroku platform using a docker image, and
 By using Travis CI we are able to build and test the application hosted on GitHub. Travis runs the tests every time we commit to GitHub, which allows us to easily discover the code breaks.
 
 For this second deliverable we used the behave. The tests do what humans should do like click on the drop-down for example. For this reason, we have had to use the sleep() function, in order to do it right. So, approximately it takes about 1 minut and 30 seconds to execute and pas all the tests.
+
+We have to say that we don't have a feature for the creation of each instance because when a tweet is created a hashtag, an impact, a user and a rating are also created as well.
 
 ## How does the App Interface work
 As well with all the code, we'll upload the sqlite DataBase in order that you don't need to set all the instances to view the final result.
