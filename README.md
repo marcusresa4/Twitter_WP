@@ -34,6 +34,8 @@ By using Travis CI we are able to build and test the application hosted on GitHu
 
 For this second deliverable we used the behave. The tests do what humans should do like click on the drop-down for example. For this reason, we have had to use the sleep() function, in order to do it right. So, approximately it takes about 1 minut and 30 seconds to execute and pas all the tests.
 
+We have to say that we don't have a feature for the creation of each instance because when a tweet is created a hashtag, an impact, a user and a rating are also created as well.
+
 ## How does the App Interface work
 As well with all the code, we'll upload the sqlite DataBase in order that you don't need to set all the instances to view the final result.
 
