@@ -1,5 +1,3 @@
-from functools import reduce
-
 from behave import *
 import operator
 from django.db.models import Q
@@ -8,9 +6,8 @@ import time
 from splinter.exceptions import ElementDoesNotExist
 use_step_matcher("parse")
 
-
-@when('I create a Tweet')
-def step_impl(context):
+@when('I create a Tweet and Rate It with {count:n} stars')
+def step_impl(context, count):
     from apps.twitter.models import Statistics
     x = Statistics.objects.create(type_stat="RT")
     x.save()
@@ -27,22 +24,16 @@ def step_impl(context):
             context.browser.find_by_xpath('//*[@id="collapseOne"]/div/form/input[2]').click()
             time.sleep(0.2)
         except ElementDoesNotExist:
-            pass
+            return
+
+    context.browser.find_by_xpath('html/body/div/div/div/form/div/button').click()
+    time.sleep(0.2)
+    context.browser.find_by_xpath('html/body/div/div/div/form/div/div/button['+str(count)+']').click()
+    time.sleep(0.2)
 
 
-@then('I\'m viewing {num:n} tweet created by {user}')
-def step_impl(context, user, num):
-    ok=0
-    from apps.twitter.models import Tweet
-    print([x.text for x in Tweet.objects.all()])
-    for row in context.table:
-        if(len(Tweet.objects.filter(text=row[0])) == 1):
-            ok+=1
-    assert ok == num
-
-
-@then('There are {count:n} Tweet\'s')
-def step_impl(context, count):
-    from apps.twitter.models import Tweet
-    print(Tweet.objects.count())
-    assert count == Tweet.objects.count()
+@then('I\'m viewing a tweet with {num_stars:n} stars')
+def step_impl(context, num_stars):
+    from apps.twitter.models import Rating
+    print([x.rate for x in Rating.objects.all()])
+    assert len(Rating.objects.filter(rate=num_stars)) == 1

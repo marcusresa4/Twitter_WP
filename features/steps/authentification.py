@@ -14,15 +14,13 @@ def step_impl(context, username, name, surname, password):
 @given('I login as user "{username}" with password "{password}"')
 def step_impl(context, username, password):
     context.browser.visit(context.get_url('/admin'))
-    time.sleep(2)
+    time.sleep(0.2)
     context.browser.find_by_xpath('//*[@id="id_username"]').fill('user')
-    time.sleep(2)
+    time.sleep(0.2)
     context.browser.find_by_xpath('//*[@id="id_password"]').fill('user')
-    time.sleep(2)
+    time.sleep(0.2)
     context.browser.find_by_xpath('//*[@id="login-form"]/div[3]/input').click()
-    time.sleep(1)
     context.browser.find_by_xpath('//*[@id="user-tools"]/a[1]').click()
-    time.sleep(1)
     context.browser.find_by_xpath('/html/body/div/a[1]').click()
 
 
