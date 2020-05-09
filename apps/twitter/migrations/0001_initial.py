@@ -31,7 +31,6 @@ class Migration(migrations.Migration):
                 ('realname', models.CharField(max_length=25)),
                 ('following', models.PositiveIntegerField()),
                 ('followers', models.PositiveIntegerField()),
-                ('profile_picture', models.CharField(max_length=100)),
             ],
         ),
         migrations.CreateModel(

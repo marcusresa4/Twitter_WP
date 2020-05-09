@@ -86,7 +86,6 @@ def create_tweet(request):
                 realname="Super User",
                 following=0,
                 followers=0,
-                profile_picture="img/profilepicture"+number+".jpg",
             )
             user.save()
         else:
@@ -136,7 +135,6 @@ def create_tweet_from_API(request):
                 realname=output["Real Name"],
                 following=0,
                 followers=0,
-                profile_picture="img/profilepicture5.jpg",
             )
             user.save()
         else:
