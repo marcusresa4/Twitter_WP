@@ -18,7 +18,7 @@ before_script:
 
 script:
 - behave
-- python manage.py collectstatic --noinput
+- python manage.py runserver
 notifications:
   email:
   - marcresaenrich@gmail.com
