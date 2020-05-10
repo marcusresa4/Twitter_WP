@@ -1,10 +1,24 @@
 language: python
+dist: xenial
 python:
 - '3.7'
 install:
 - pip install -r requirements.txt
+
+addons:
+  chrome: stable
+  apt:
+    packages:
+      - libpq-dev
+
+before_script:
+  - LATEST_CHROMEDRIVER_VERSION=`curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"`
+  - curl "https://chromedriver.storage.googleapis.com/${LATEST_CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -O
+  - unzip chromedriver_linux64.zip -d ~/bin
+
 script:
-- python manage.py runserver
+- behave
+- python manage.py test apps
 notifications:
   email:
   - marcresaenrich@gmail.com
