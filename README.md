@@ -63,7 +63,7 @@ Therefore, it would be a slowly process obtaining all the tweets in some cases. 
 considered that getting only the last tweet would be enough to see how it works.
 
 ## Changes in the model
-Takint into account the models, comparing them with the ones in the first deliverable, we have
+Taking into account the models, comparing them with the ones in the first deliverable, we have
 changed the authentication. The design consist in that if a user is not registered or is not
 authenticated, they would be able to see de content of the page,seeing the tweets but the user
 can’t rate it or publish a tweet themselves.
