@@ -18,6 +18,7 @@ before_script:
 
 script:
 - behave
+- python manage.py collectstatic --noinput
 notifications:
   email:
   - marcresaenrich@gmail.com
