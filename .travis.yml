@@ -19,7 +19,7 @@ before_script:
 
 script:
 - behave
-- python manage.py runserver
+- python manage.py test apps
 notifications:
   email:
   - marcresaenrich@gmail.com
