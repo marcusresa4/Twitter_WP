@@ -14,7 +14,8 @@ class TwitterUser(models.Model):
         return self.username
 
 class Tweet(models.Model):
-    id_tweet = models.PositiveIntegerField(primary_key=True)
+    #id_tweet = models.PositiveIntegerField(primary_key=True)
+    id_tweet = models.BigIntegerField(primary_key=True)
     text = models.TextField(max_length=280, help_text="280 characters max")
     hashtag_in_tweet= models.ManyToManyField('Hashtag', related_name='hashtags_tweet')
     user = models.ForeignKey('TwitterUser' , on_delete=models.CASCADE)

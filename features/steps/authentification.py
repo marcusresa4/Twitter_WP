@@ -1,6 +1,5 @@
 from behave import *
 from django.test import Client
-from django.contrib.auth.models import User
 
 use_step_matcher("parse")
 
