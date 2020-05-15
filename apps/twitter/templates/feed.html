@@ -2,6 +2,7 @@
 {% load static %}
 {% block page_content %}
 
+<span vocab="http://schema.org/" typeof="SocialMediaPosting">
 {% if user.is_authenticated %}
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="{% url 'feed' %}">Twitter 2.0 by i4Ventures</a>
