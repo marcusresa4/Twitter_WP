@@ -20,23 +20,24 @@
 {% for tweet in tweets %}
 <span vocab="http://schema.org/" typeof="SocialMediaPosting">
 <div class="media" style="margin-left: 10%; margin-right: 25%; background-color: #FEFEFE">
-    <img src="{% static tweet.user.profile_picture %}" class="mr-3 picture_size" alt="profile_picture" style="width: 35px;height: 35px">
+    <img src="{% static tweet.user.profile_picture %}" property="image" class="mr-3 picture_size" alt="profile_picture" style="width: 35px;height: 35px">
     <div class="media-body">
-        <h5 class="mt-0"><a style="color: rgba(0,0,0,0.76)" href="{% url 'tweets_user' tweet.user.username %}">{{ tweet.user.realname }}</a>&nbsp;
+        <h5 class="mt-0"><a style="color: rgba(0,0,0,0.76)" href="{% url 'tweets_user' tweet.user.username %}" property="url"><span property="creator">{{ tweet.user.realname }}</span></a>&nbsp;
             <div style="font-size:smaller; color: rgba(145,162,184,0.58);"><span property="author">{{ tweet.user.username }}</span></div></h5>
-        <span property="text">{{ tweet.text }}</span>
+        <span property="headline">{{ tweet.text }}</span>
         {% for hashtags in tweet.hashtag_in_tweet.all %}
-            <a href="{% url 'tweets_hashtag' hashtags.hashtag %}"><span property="keywords">{{ hashtags.hashtag }}</span></a>
+            <a href="{% url 'tweets_hashtag' hashtags.hashtag %}" property="url"><span property="keywords">{{ hashtags.hashtag }}</span></a>
         {% endfor %}&nbsp;
         <br>
         {% for impact in impacts %}
+        <span vocab="http://schema.org/" typeof="InteractionCounter">
         {% if impact.tweet.id_tweet == tweet.id_tweet and impact.stat.type_stat == "RT" %}
-        <a style="font-size: small ; color: dimgrey;">RT: <span property="interactionStatistic">{{ impact.stat_value }}</span></a>
-
+        <a style="font-size: small ; color: dimgrey;"><span property="alternateName">{{ impact.stat.type_stat }}</span> : <span property="userInteractionCount">{{ impact.stat_value }}</span></a>
         {% endif %}
         {% if impact.tweet.id_tweet == tweet.id_tweet and impact.stat.type_stat == "FAV" %}
-        <a style="font-size: small ; color: dimgrey;">FAV: <span property="interactionStatistic">{{ impact.stat_value }}</span></a>
+        <a style="font-size: small ; color: dimgrey;"><span property="alternateName">{{ impact.stat.type_stat }}</span> : <span property="userInteractionCount">{{ impact.stat_value }}</span></a>
         {% endif %}
+        </span>
         {%  endfor %}
         <br>
         {% if user.is_authenticated %}
