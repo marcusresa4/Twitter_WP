@@ -2,6 +2,7 @@
 {% load static %}
 {% block page_content %}
 
+<span vocab="http://schema.org/" typeof="SocialMediaPosting">
 {% if user.is_authenticated %}
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="{% url 'feed' %}">Twitter 2.0 by i4Ventures</a>
@@ -23,21 +24,21 @@
 <div class="media" style="margin-left: 10%; margin-right: 25%; background-color: #FEFEFE">
     <img src="{% static tweet.user.profile_picture %}" class="mr-3 picture_size" alt="profile_picture" style="width: 35px;height: 35px">
     <div class="media-body">
-        <h5 class="mt-0"><a style="color: rgba(0,0,0,0.76)" href="{% url 'tweets_user' tweet.user.username %}">{{ tweet.user.realname }}</a>&nbsp;<div style="font-size:smaller; color: rgba(145,162,184,0.58);">{{ tweet.user.username }}</div></h5>
-        {{ tweet.text }}
+        <h5 class="mt-0"><a style="color: rgba(0,0,0,0.76)" href="{% url 'tweets_user' tweet.user.username %}"><span property="author">{{ tweet.user.username }}</span></a>&nbsp;
+             <div style="font-size:smaller; color: rgba(145,162,184,0.58);"><span property="author">{{ tweet.user.username }}</span></div></h5>
+           <span property="text">{{ tweet.text }}</span>
         {% for hashtags in tweet.hashtag_in_tweet.all %}
         <a href="{% url 'tweets_hashtag' hashtags.hashtag %}">
-            {{ hashtags.hashtag }}
-            {% endfor %}
+        <span property="keywords">{{ hashtags.hashtag }}</span>            {% endfor %}
         </a>&nbsp;
         <br>
         {% for impact in impacts %}
         {% if impact.tweet.id_tweet == tweet.id_tweet and impact.stat.type_stat == "RT" %}
-        <a style="font-size: small ; color: dimgrey;">RT: {{ impact.stat_value }}</a>
+        <a style="font-size: small ; color: dimgrey;">RT: <span property="interactionStatistic">{{ impact.stat_value }}</span></a>
 
         {% endif %}
         {% if impact.tweet.id_tweet == tweet.id_tweet and impact.stat.type_stat == "FAV" %}
-        <a style="font-size: small ; color: dimgrey;">FAV: {{ impact.stat_value }}</a>
+        <a style="font-size: small ; color: dimgrey;">FAV: <span property="interactionStatistic">{{ impact.stat_value }}</span></a>
         {% endif %}
         {%  endfor %}
         <br>
@@ -211,6 +212,7 @@
 </div>
 
 {% endif %}
+</span>
 
 <br>
 {% endblock %}
