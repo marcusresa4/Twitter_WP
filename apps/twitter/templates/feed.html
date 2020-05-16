@@ -3,16 +3,18 @@
 {% block page_content %}
 {% if user.is_authenticated %}
 <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="{% url 'feed' %}">Twitter 2.0 by i4Ventures</a>
-    <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary ">Log Out</button></a>
+    <span vocab="http://schema.org/" typeof="Organization">
+        <a class="navbar-brand" href="{% url 'feed' %}"><span property="name">Twitter 2.0</span> by <span property="legalName">i4Ventures</span></a>
+        <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary ">Log Out</button></a>
+    </span>
 </nav>
 {% else %}
-
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="{% url 'feed' %}">Twitter 2.0 by i4Ventures</a>
-    <a href="{% url 'social:begin' 'google-oauth2' %}"><button type="button" class="btn btn-outline-primary ">Log In</button></a>
-</nav>
-
+<span vocab="http://schema.org/" typeof="Organization">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'feed' %}"><span property="name">Twitter 2.0</span> by <span property="legalName">i4Ventures</span></a>
+        <a href="{% url 'social:begin' 'google-oauth2' %}"><button type="button" class="btn btn-outline-primary ">Log In</button></a>
+    </nav>
+</span>
 {% endif %}
 
 <h2 style="margin-left: 30%;margin-top: 20px">All the Tweets</h2>
@@ -59,37 +61,37 @@
                     </div>
                 </div>
             </form>
-
             {% for rate in rating %}
             {% if rate.tweet.id_tweet == tweet.id_tweet %}
             {% if rate.rate == 1 %}
             {% with url="img/1-STARS.png" %}
-            <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">{{rate.rate}}/5</span>
             {% endwith %}
             {% endif %}
             {% if rate.rate == 2 %}
             {% with url="img/2-STARS.png" %}
-            <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">{{rate.rate}}/5</span>
             {% endwith %}
             {% endif %}
             {% if rate.rate == 3 %}
             {% with url="img/3-STARS.png" %}
-            <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">{{rate.rate}}/5</span>
             {% endwith %}
             {% endif %}
             {% if rate.rate == 4 %}
             {% with url="img/4-STARS.png" %}
-            <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">{{rate.rate}}/5</span>
             {% endwith %}
             {% endif %}
             {% if rate.rate == 5 %}
             {% with url="img/5-STARS.png" %}
-            <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">{{rate.rate}}/5</span>
             {% endwith %}
             {% endif %}
             {% endif %}
             {% endfor %}
         </div>
+        </ul>
         {% endif %}
     </div>
 </div>
@@ -208,7 +210,6 @@
         <input type="submit" class="btn btn-primary" name="Delete Tweet" value="Delete Tweet">
     </form>
 </div>
-
 {% endif %}
 <br>
 {% endblock %}
