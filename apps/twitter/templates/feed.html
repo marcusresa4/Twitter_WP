@@ -2,14 +2,18 @@
 {% load static %}
 {% block page_content %}
 {% if user.is_authenticated %}
-<nav class="navbar navbar-light bg-light">
-    <span vocab="http://schema.org/" typeof="Organization">
-        <a class="navbar-brand" href="{% url 'feed' %}"><span property="name">Twitter 2.0</span> by <span property="legalName">i4Ventures</span></a>
+
+        <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'feed' %}">
+            <span vocab="http://schema.org/" typeof="Corporation">
+            <span property="name">Twitter 2.0</span> by <span property="legalName">i4Ventures</span>
+                 </span>
+        </a>
         <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary ">Log Out</button></a>
-    </span>
-</nav>
+        </nav>
+
 {% else %}
-<span vocab="http://schema.org/" typeof="Organization">
+<span vocab="http://schema.org/" typeof="LocalBusiness">
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="{% url 'feed' %}"><span property="name">Twitter 2.0</span> by <span property="legalName">i4Ventures</span></a>
         <a href="{% url 'social:begin' 'google-oauth2' %}"><button type="button" class="btn btn-outline-primary ">Log In</button></a>
@@ -32,14 +36,16 @@
         {% endfor %}&nbsp;
         <br>
         {% for impact in impacts %}
-        <span vocab="http://schema.org/" typeof="InteractionCounter">
         {% if impact.tweet.id_tweet == tweet.id_tweet and impact.stat.type_stat == "RT" %}
+            <span rel="interactionStatistic">
+            <span typeof="InteractionCounter">
         <a style="font-size: small ; color: dimgrey;"><span property="alternateName">{{ impact.stat.type_stat }}</span> : <span property="userInteractionCount">{{ impact.stat_value }}</span></a>
         {% endif %}
         {% if impact.tweet.id_tweet == tweet.id_tweet and impact.stat.type_stat == "FAV" %}
         <a style="font-size: small ; color: dimgrey;"><span property="alternateName">{{ impact.stat.type_stat }}</span> : <span property="userInteractionCount">{{ impact.stat_value }}</span></a>
-        {% endif %}
         </span>
+            </span>
+        {% endif %}
         {%  endfor %}
         <br>
         {% if user.is_authenticated %}
