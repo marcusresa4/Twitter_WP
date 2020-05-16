@@ -6,8 +6,16 @@
         <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="{% url 'feed' %}">
             <span vocab="http://schema.org/" typeof="Corporation">
-            <span property="name">Twitter 2.0</span> by <span property="legalName">i4Ventures</span>
-                 </span>
+                {% with url="img/nobita.png" %}
+                <img src= "{% static url %}" property="logo" class="mr-3 picture_size" alt="logo" style="width: 80px;height: 50px">
+                {% endwith %}
+                <span rel="makesOffer">
+                <span typeof="Offer">
+                    <span property="name">Twitter 2.0</span>
+                </span>
+                </span>
+                    by <span property="legalName">i4Ventures</span><font size=1><i>&nbsp;&nbsp;<span property="slogan">We are the best company monitoring tweets!</span></i></font>
+            </span>
         </a>
         <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary ">Log Out</button></a>
         </nav>
