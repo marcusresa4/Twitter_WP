@@ -9,7 +9,7 @@
                 <span rel="logo">
                 <span typeof="ImageObject">
                     {% with url="img/nobita.png" %}
-                    <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 5ppx" property="contentUrl">
+                    <img src= "{% static url %}" class="mr-3 picture_size" alt="logo" style="width: 80px;height: 5ppx" property="contentUrl">
                     {% endwith %}
                 </span>
                 </span>
@@ -19,7 +19,13 @@
                 </span>
                 </span>
                 by <span property="legalName">i4Ventures</span><font size=1><i>&nbsp;&nbsp;<span property="slogan">We are the best company monitoring tweets!</span></i></font>
-            <a href="http://www.twitter.com" property="url">Main Page</a>
+                <span property="url" content="http://i3ventures.es"><a href="http://i3ventures.es">Click here to access to the Main Page</a></span>
+
+                <span rel="parentOrganization">
+                <span typeof="Organization">
+                    <span property="legalName">i3Venture</span>
+                </span>
+                </span>
             </span>
         </a>
         <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary ">Log Out</button></a>
