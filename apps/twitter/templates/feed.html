@@ -1,42 +1,95 @@
 {% extends "base.html" %}
 {% load static %}
 {% block page_content %}
-
 {% if user.is_authenticated %}
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="{% url 'feed' %}">Twitter 2.0 by i4Ventures</a>
-    <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary ">Log Out</button></a>
-</nav>
+
+        <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'feed' %}">
+            <span vocab="http://schema.org/" typeof="Corporation">
+                <span rel="logo">
+                <span typeof="ImageObject">
+                    {% with url="img/nobita.png" %}
+                    <img src= "{% static url %}" class="mr-3 picture_size" alt="logo" style="width: 80px;height: 5ppx" property="contentUrl">
+                    {% endwith %}
+                </span>
+                </span>
+                <span rel="makesOffer">
+                <span typeof="Offer">
+                    <span property="name">Twitter 2.0</span>
+                </span>
+                </span>
+                by <span property="legalName">i4Ventures</span><font size=1><i>&nbsp;&nbsp;<span property="slogan">We are the best company monitoring tweets!</span></i></font>
+                <span property="url" content="http://i3ventures.es"><a href="http://i3ventures.es">Main Company Page</a></span>
+            </span>
+        </a>
+        <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary ">Log Out</button></a>
+        </nav>
+
 {% else %}
-
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="{% url 'feed' %}">Twitter 2.0 by i4Ventures</a>
-    <a href="{% url 'social:begin' 'google-oauth2' %}"><button type="button" class="btn btn-outline-primary ">Log In</button></a>
-</nav>
-
+        <nav class="navbar navbar-light bg-light">
+<a class="navbar-brand" href="{% url 'feed' %}">
+            <span vocab="http://schema.org/" typeof="Corporation">
+                <span rel="logo">
+                <span typeof="ImageObject">
+                    {% with url="img/nobita.png" %}
+                    <img src= "{% static url %}" class="mr-3 picture_size" alt="logo" style="width: 80px;height: 5ppx" property="contentUrl">
+                    {% endwith %}
+                </span>
+                </span>
+                <span rel="makesOffer">
+                <span typeof="Offer">
+                    <span property="name">Twitter 2.0</span>
+                </span>
+                </span>
+                by <span property="legalName">i4Ventures</span><font size=1><i>&nbsp;&nbsp;<span property="slogan">We are the best company monitoring tweets!</span></i></font>
+                <span property="url" content="http://i3ventures.es"><a href="http://i3ventures.es">Main Company Page</a></span>
+            </span>
+        </a>            <a href="{% url 'social:begin' 'google-oauth2' %}"><button type="button" class="btn btn-outline-primary ">Log In</button></a>
+        </nav>
 {% endif %}
 
-<h2 style="margin-left: 30%;margin-top: 20px">All the Tweets</h2>
+<h2 style="margin-left: 30%;margin-top: 20px">All the Tweets monitored</h2>
 <br>
 {% for tweet in tweets %}
-
+<span vocab="http://schema.org/" typeof="SocialMediaPosting">
 <div class="media" style="margin-left: 10%; margin-right: 25%; background-color: #FEFEFE">
+    <img src="{% static tweet.user.profile_picture %}" property="image" class="mr-3 picture_size" alt="profile_picture" style="width: 35px;height: 35px">
     <div class="media-body">
-        <h5 class="mt-0"><a style="color: rgba(0,0,0,0.76)" href="{% url 'tweets_user' tweet.user.username %}">{{ tweet.user.realname }}</a>&nbsp;<div style="font-size:smaller; color: rgba(145,162,184,0.58);">{{ tweet.user.username }}</div></h5>
-        {{ tweet.text }}
+        <span rel="author">
+            <span typeof="Person">
+                <h5 class="mt-0"><a style="color: rgba(0,0,0,0.76)" href="{% url 'tweets_user' tweet.user.username %}" property="url"><span property="name">{{ tweet.user.realname }}</span></a>&nbsp;
+            <div style="font-size:smaller; color: rgba(145,162,184,0.58);"><span property="alternateName">{{ tweet.user.username }}</span></div></h5>
+            </span>
+        </span>
+                <span property="headline">{{ tweet.text }}</span>
         {% for hashtags in tweet.hashtag_in_tweet.all %}
-        <a href="{% url 'tweets_hashtag' hashtags.hashtag %}">
-            {{ hashtags.hashtag }}
-            {% endfor %}
-        </a>&nbsp;
+            <a href="{% url 'tweets_hashtag' hashtags.hashtag %}" property="url"><span property="keywords">{{ hashtags.hashtag }}</span></a>
+        {% endfor %}&nbsp;
         <br>
         {% for impact in impacts %}
         {% if impact.tweet.id_tweet == tweet.id_tweet and impact.stat.type_stat == "RT" %}
-        <a style="font-size: small ; color: dimgrey;">RT: {{ impact.stat_value }}</a>
-
+            <span rel="interactionStatistic">
+            <span typeof="InteractionCounter">
+                <span rel="interactionType">
+                <span typeof="ShareAction">
+                    <a style="font-size: small ; color: dimgrey;"><span property="alternateName">{{ impact.stat.type_stat }}</span></a>
+                </span>
+                </span>
+                <a style="font-size: small ; color: dimgrey;">: <span property="userInteractionCount">{{ impact.stat_value }}</span></a>
+            </span>
+            </span>
         {% endif %}
         {% if impact.tweet.id_tweet == tweet.id_tweet and impact.stat.type_stat == "FAV" %}
-        <a style="font-size: small ; color: dimgrey;">FAV: {{ impact.stat_value }}</a>
+            <span rel="interactionStatistic">
+            <span typeof="InteractionCounter">
+                <span rel="interactionType">
+                <span typeof="LikeAction">
+                    <a style="font-size: small ; color: dimgrey;"><span property="alternateName">{{ impact.stat.type_stat }}</span></a>
+                </span>
+                </span>
+                <a style="font-size: small ; color: dimgrey;">: <span property="userInteractionCount">{{ impact.stat_value }}</span></a>
+            </span>
+            </span>
         {% endif %}
         {%  endfor %}
         <br>
@@ -59,43 +112,43 @@
                     </div>
                 </div>
             </form>
-
             {% for rate in rating %}
             {% if rate.tweet.id_tweet == tweet.id_tweet %}
             {% if rate.rate == 1 %}
             {% with url="img/1-STARS.png" %}
-            <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">{{rate.rate}}/5</span>
             {% endwith %}
             {% endif %}
             {% if rate.rate == 2 %}
             {% with url="img/2-STARS.png" %}
-            <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">{{rate.rate}}/5</span>
             {% endwith %}
             {% endif %}
             {% if rate.rate == 3 %}
             {% with url="img/3-STARS.png" %}
-            <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">{{rate.rate}}/5</span>
             {% endwith %}
             {% endif %}
             {% if rate.rate == 4 %}
             {% with url="img/4-STARS.png" %}
-            <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">{{rate.rate}}/5</span>
             {% endwith %}
             {% endif %}
             {% if rate.rate == 5 %}
             {% with url="img/5-STARS.png" %}
-            <img src= "{% static url %}" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px">
+            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">{{rate.rate}}/5</span>
             {% endwith %}
             {% endif %}
             {% endif %}
             {% endfor %}
         </div>
+        </ul>
         {% endif %}
     </div>
 </div>
+</span>
 <br>
 {% endfor %}
-
 {% if user.is_authenticated %}
 
 <div class="accordion" id="accordionExample">
@@ -191,6 +244,7 @@
             Delete Tweet
         </button>
     </h2>
+
 </div>
 <div style="margin-left: 20px">
     <br>
@@ -208,8 +262,6 @@
         <input type="submit" class="btn btn-primary" name="Delete Tweet" value="Delete Tweet">
     </form>
 </div>
-
 {% endif %}
-
 <br>
 {% endblock %}
