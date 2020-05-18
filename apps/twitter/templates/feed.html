@@ -53,7 +53,6 @@
 {% for tweet in tweets %}
 <span vocab="http://schema.org/" typeof="SocialMediaPosting">
 <div class="media" style="margin-left: 10%; margin-right: 25%; background-color: #FEFEFE">
-    <img src="{% static tweet.user.profile_picture %}" property="image" class="mr-3 picture_size" alt="profile_picture" style="width: 35px;height: 35px">
     <div class="media-body">
         <span rel="author">
             <span typeof="Person">
