@@ -11,12 +11,19 @@ addons:
     packages:
       - libpq-dev
 
+<<<<<<< HEAD
 
 before_script:
  - LATEST_CHROMEDRIVER_VERSION=`curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"`
  - curl "https://chromedriver.storage.googleapis.com/${LATEST_CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -O
  - unzip chromedriver_linux64.zip -d ~/bin
 
+=======
+before_script:
+  - LATEST_CHROMEDRIVER_VERSION=`curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"`
+  - curl "https://chromedriver.storage.googleapis.com/${LATEST_CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -O
+  - unzip chromedriver_linux64.zip -d ~/bin
+>>>>>>> 31a20e014606f81591aed897688908cabbdd7075
 
 script:
 - behave

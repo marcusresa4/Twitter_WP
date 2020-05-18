@@ -8,7 +8,7 @@ class TwitterUser(models.Model):
     realname = models.CharField(max_length=25)
     following = models.PositiveIntegerField()
     followers = models.PositiveIntegerField()
-    profile_picture = models.CharField(max_length=100)
+
 
     def __str__(self):
         return self.username
