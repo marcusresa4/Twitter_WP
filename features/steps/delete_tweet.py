@@ -31,8 +31,7 @@ def step_impl(context):
 @when('I delete a Tweet(There are {count:n} tweets)')
 def step_impl(context,count):
     try:
-        num=count+3
-        context.browser.find_by_xpath('/html/body/div['+str(num)+']/form/input[2]').click()
-        
+        context.browser.find_by_xpath('/html/body/div[3]/form/input[2]').click()
+        time.sleep(1)
     except ElementDoesNotExist:
         pass

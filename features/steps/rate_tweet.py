@@ -22,14 +22,14 @@ def step_impl(context, count):
             context.browser.find_by_xpath('//*[@id="id_hashtag_in_tweet"]').fill(row[1])
             time.sleep(0.2)
             context.browser.find_by_xpath('//*[@id="collapseOne"]/div/form/input[2]').click()
-            time.sleep(0.2)
+            time.sleep(1)
         except ElementDoesNotExist:
             return
 
-    context.browser.find_by_xpath('html/body/div/div/div/form/div/button').click()
-    time.sleep(0.2)
-    context.browser.find_by_xpath('html/body/div/div/div/form/div/div/button['+str(count)+']').click()
-    time.sleep(0.2)
+    context.browser.find_by_xpath('/html/body/span/div/div/div/form/div/button').click()
+    time.sleep(1)
+    context.browser.find_by_xpath('/html/body/span/div/div/div/form/div/div/button[3]').click()
+    time.sleep(1)
 
 
 @then('I\'m viewing a tweet with {num_stars:n} stars')
