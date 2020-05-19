@@ -9,7 +9,7 @@
                 <span rel="logo">
                 <span typeof="ImageObject">
                     {% with url="img/nobita.png" %}
-                    <img src= "{% static url %}" class="mr-3 picture_size" alt="logo" style="width: 80px;height: 5ppx" property="contentUrl">
+                    <img src= "{% static url %}" class="mr-3 picture_size" alt="logo" style="width: 80px;height: 5px" property="contentUrl">
                     {% endwith %}
                 </span>
                 </span>
@@ -57,7 +57,7 @@
         <img src="{% static user.profile_picture %}" property="image" class="mr-3 picture_size" alt="profile_picture" style="width: 100px;height: 100px">
     </div>
     <br>
-    <h3 style="margin-left: 42%;margin-top: 20px"><em><span property="name">{{ user.realname}}</span></em></h3>
+    <h3 style="text-align: center"><em><span property="name">{{ user.realname}}</span></em></h3>
     <br>
 
     <div class="card" style="width: 18rem;margin-left: 38%;" align="center">
