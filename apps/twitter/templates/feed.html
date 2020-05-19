@@ -116,27 +116,27 @@
             {% if rate.tweet.id_tweet == tweet.id_tweet %}
             {% if rate.rate == 1 %}
             {% with url="img/1-STARS.png" %}
-            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">Great Tweet!</span>
+            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">{{rate.rate}}/5</span>
             {% endwith %}
             {% endif %}
             {% if rate.rate == 2 %}
             {% with url="img/2-STARS.png" %}
-            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">Good Tweet!</span>
+            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">{{rate.rate}}/5</span>
             {% endwith %}
             {% endif %}
             {% if rate.rate == 3 %}
             {% with url="img/3-STARS.png" %}
-            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">Average Tweet</span>
+            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">{{rate.rate}}/5</span>
             {% endwith %}
             {% endif %}
             {% if rate.rate == 4 %}
             {% with url="img/4-STARS.png" %}
-            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">Bad Tweet!</span>
+            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">{{rate.rate}}/5</span>
             {% endwith %}
             {% endif %}
             {% if rate.rate == 5 %}
             {% with url="img/5-STARS.png" %}
-            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">Awful Tweet!</span>
+            <img src= "{% static url %}" property="image" class="mr-3 picture_size" alt="rate" style="width: 80px;height: 15px"><span property="contentRating">{{rate.rate}}/5</span>
             {% endwith %}
             {% endif %}
             {% endif %}
